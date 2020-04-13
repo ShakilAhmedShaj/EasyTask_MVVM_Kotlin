@@ -8,10 +8,7 @@
     <string name="get_help_signing">Get help signing in</string>
     <string name="error_no_internet">No Internet!</string>
     <string name="error_no_internet_msg">Sorry there is no network connection.Please check your network connection.</string>
-    <string name="navigation_home">Home</string>
-    <string name="navigation_customer">Customer</string>
-    <string name="navigation_attendance">Attendance</string>
-    <string name="navigation_image_queue">Photo Queue</string>
+
     <string name="or">OR</string>
     <string name="signup">Sign up</string>
     <string name="no_account">Don\'t have account?</string>
@@ -21,4 +18,54 @@
     <string name="hint_confirm_password">Confirm Password</string>
     <string name="btn_signup">Sign up</string>
     <string name="login">Log In</string>
+
+    <string name="empty_user_name_title">Empty UserName!</string>
+    <string name="empty_user_name_msg">UserName cannot be empty</string>
+    <string name="empty_email_title">Empty Email!</string>
+    <string name="empty_email_msg">Email cannot be empty</string>
+    <string name="empty_password_title">Empty Password!</string>
+    <string name="empty_password_msg">Password cannot be empty</string>
+    <string name="empty_confirm_password_title">Empty Confirm Password!</string>
+    <string name="empty_confirm_password_msg">Confirm password cannot be empty</string>
+
+    <string name="error_confirm_password_title">Password Not Matched!</string>
+    <string name="error_confirm_password_msg">Confirm password does not match.</string>
+    <string name="navigation_home">Home</string>
+    <string name="navigation_add_task">Add Task</string>
+    <string name="navigation_profile">Profile</string>
+    <string name="task_title">Title</string>
+    <string name="task_body">Body</string>
+
+    <string name="btn_ok">OK</string>
+    <string name="title_success_dialog">Success!</string>
+    <string name="title_un_successful_dialog">UnSuccessful!</string>
+    <string name="title_successful_signup">Great!</string>
+    <string name="title_error_dialog">Error!</string>
+    <string name="msg_add_post_success">Task added successfully.</string>
+    <string name="msg_add_post_un_successful">Sorry! Something went wrong. Please try again.</string>
+    <string name="msg_signup_successful">Hurry! you have created a new account. Please login</string>
+    <string name="alert_error_title">Ouch!</string>
+    <string name="alert_error_msg">There was a error please try again.</string>
+    <string name="alert_success_title">Great!</string>
+    <string name="alert_edit_success_msg">Successfully updated</string>
+    <string name="todo">content description</string>
+    <string name="profile_post">Posts</string>
+    <string name="profile_follower">Follower</string>
+    <string name="profile_following">Following</string>
+    <string name="zero">0</string>
+    <string name="edit_menu_item">Edit</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_bio">Bio</string>
+    <string name="private_information">Private Information</string>
+    <string name="email">Email</string>
+    <string name="email_field_hint">Email</string>
+    <string name="name">Name</string>
+    <string name="bio">Bio</string>
+
+
+    <string-array name="task_status_list">
+        <item>PENDING</item>
+        <item>STARTED</item>
+        <item>COMPLETED</item>
+    </string-array>
 </resources>
