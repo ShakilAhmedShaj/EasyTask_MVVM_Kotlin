@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">To Do MVVM</string>
+
+    <string name="hint_password">Password</string>
+    <string name="hint_userId">User</string>
+    <string name="btn_login">Log In</string>
+    <string name="forgot_password">Forgot your login detail?</string>
+    <string name="get_help_signing">Get help signing in</string>
+    <string name="error_no_internet">No Internet!</string>
+    <string name="error_no_internet_msg">Sorry there is no network connection.Please check your network connection.</string>
+    <string name="navigation_home">Home</string>
+    <string name="navigation_customer">Customer</string>
+    <string name="navigation_attendance">Attendance</string>
+    <string name="navigation_image_queue">Photo Queue</string>
+    <string name="or">OR</string>
+    <string name="signup">Sign up</string>
+    <string name="no_account">Don\'t have account?</string>
+    <string name="user_name">User Name</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_user_name">User Name</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+    <string name="btn_signup">Sign up</string>
+    <string name="login">Log In</string>
+</resources>
