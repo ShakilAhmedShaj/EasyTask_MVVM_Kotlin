@@ -1,8 +1,11 @@
 package com.shajt3ch.todomvvm.viewmodel.splash
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.shajt3ch.todomvvm.BuildConfig
+import com.shajt3ch.todomvvm.model.local.AppPreferences
 import com.shajt3ch.todomvvm.model.remote.Networking
 import com.shajt3ch.todomvvm.model.repository.ValidateTokenRepository
 
@@ -19,7 +22,23 @@ class SplashViewModel : ViewModel() {
     private val networkService = Networking.create(BuildConfig.BASE_URL)
     private val validateTokenRepository = ValidateTokenRepository(networkService)
 
-    fun validateToken(token: String) = liveData {
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var appPreferences: AppPreferences
+
+    private lateinit var token: String
+
+    fun init(context: Context) {
+        sharedPreferences =
+            context.getSharedPreferences("com.shajt3ch.todomvvm.pref", Context.MODE_PRIVATE)
+        appPreferences = AppPreferences(sharedPreferences)
+        token = appPreferences.getAccessToken().toString()
+        //token = "Bearer ${appPreferences.getAccessToken()}"
+
+
+    }
+
+
+    fun validateToken() = liveData {
         val data = validateTokenRepository.validateToken(token)
         emit(data)
     }

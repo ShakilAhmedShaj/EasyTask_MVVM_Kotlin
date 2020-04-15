@@ -26,8 +26,6 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private lateinit var viewModel: SplashViewModel
-    private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var appPreferences: AppPreferences
     private val mContext = this
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,8 +36,7 @@ class SplashActivity : AppCompatActivity() {
         GeneralHelper.hideStatusBar(this)
 
         viewModel = ViewModelProvider(this).get(SplashViewModel::class.java)
-        sharedPreferences = getSharedPreferences("com.shajt3ch.todomvvm.pref", Context.MODE_PRIVATE)
-        appPreferences = AppPreferences(sharedPreferences)
+        viewModel.init(this)
 
 
         //splash delay
@@ -57,30 +54,28 @@ class SplashActivity : AppCompatActivity() {
 
         if (status) {
 
-            val token = "Bearer ${appPreferences.getAccessToken()}"
+
             //val token = appPreferences.getAccessToken()
 
-            withContext(Dispatchers.Main)
-            {
-                token?.let {
-                    viewModel.validateToken(it)
-                        .observe(mContext, Observer {
+            withContext(Dispatchers.Main) {
 
-                            if (it.code() == 200) {
+                viewModel.validateToken().observe(mContext, Observer {
 
-                                val msg = it.body()
+                    if (it.code() == 200) {
 
-                                if (msg?.message == "true") {
-                                    finish()
-                                    startActivity(intentFor<MainActivity>())
+                        val msg = it.body()
 
-                                } else {
-                                    startActivity(intentFor<LoginActivity>())
-                                }
+                        if (msg?.message == "true") {
+                            finish()
+                            startActivity(intentFor<MainActivity>())
 
-                            }
-                        })
-                }
+                        } else {
+                            startActivity(intentFor<LoginActivity>())
+                        }
+
+                    }
+                })
+
             }
 
 
