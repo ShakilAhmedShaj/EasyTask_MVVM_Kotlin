@@ -7,6 +7,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.shajt3ch.todomvvm.R
 import com.shajt3ch.todomvvm.model.remote.request.auth.LoginRequest
+import com.shajt3ch.todomvvm.model.remote.response.auth.LoginResponse
+import com.shajt3ch.todomvvm.view.ui.main.MainActivity
 import com.shajt3ch.todomvvm.viewmodel.auth.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.alert
@@ -26,6 +28,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        viewModel.init(this)
 
         btn_login.onClick { prepareLogin() }
 
@@ -83,11 +86,26 @@ class LoginActivity : AppCompatActivity() {
 
                 val data = it.body()
 
+                data?.let { saveUserDetail(data) }
+
+                Log.d(TAG, "Login Success!")
                 Log.d(TAG, "Name : ${data?.name}  Email : ${data?.email}")
+
 
             } else {
                 Log.e(TAG, "error code : ${it.code()}  message : ${it.errorBody()}")
             }
+        })
+    }
+
+    private fun saveUserDetail(loginResponse: LoginResponse) {
+        viewModel.saveUserDetail(loginResponse).observe(this, Observer {
+
+            if (it) {
+                finish()
+                startActivity(intentFor<MainActivity>())
+            }
+
         })
     }
 }
