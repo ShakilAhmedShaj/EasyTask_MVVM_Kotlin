@@ -23,13 +23,7 @@
         </activity>
         <activity android:name="com.shajt3ch.todomvvm.view.ui.auth.SignUpActivity" />
         <activity android:name="com.shajt3ch.todomvvm.view.ui.auth.LoginActivity" />
-        <activity android:name="com.shajt3ch.todomvvm.view.ui.main.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name="com.shajt3ch.todomvvm.view.ui.main.MainActivity" />
     </application>
 
 </manifest>
