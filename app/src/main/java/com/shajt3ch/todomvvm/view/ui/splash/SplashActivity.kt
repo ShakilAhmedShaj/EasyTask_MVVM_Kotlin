@@ -54,31 +54,31 @@ class SplashActivity : AppCompatActivity() {
 
         if (status) {
 
-
-            //val token = appPreferences.getAccessToken()
-
             withContext(Dispatchers.Main) {
+                viewModel.token.observe(mContext, Observer {
 
-                viewModel.validateToken().observe(mContext, Observer {
+                    if (it.isNullOrEmpty()) {
+                        startActivity(intentFor<LoginActivity>())
+                    } else {
+                        viewModel.validateToken().observe(mContext, Observer {
 
-                    if (it.code() == 200) {
+                            if (it.code() == 200) {
 
-                        val msg = it.body()
+                                val msg = it.body()
 
-                        if (msg?.message == "true") {
-                            finish()
-                            startActivity(intentFor<MainActivity>())
-
-                        } else {
-                            startActivity(intentFor<LoginActivity>())
-                        }
-
+                                if (msg?.message == "true") {
+                                    finish()
+                                    startActivity(intentFor<MainActivity>())
+                                } else {
+                                    startActivity(intentFor<LoginActivity>())
+                                }
+                            }
+                        })
                     }
                 })
 
+
             }
-
-
         } else {
 
             withContext(Dispatchers.Main) {

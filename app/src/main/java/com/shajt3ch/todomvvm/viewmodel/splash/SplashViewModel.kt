@@ -2,6 +2,7 @@ package com.shajt3ch.todomvvm.viewmodel.splash
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.shajt3ch.todomvvm.BuildConfig
@@ -25,13 +26,13 @@ class SplashViewModel : ViewModel() {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var appPreferences: AppPreferences
 
-    private lateinit var token: String
+    var token = MutableLiveData<String>()
 
     fun init(context: Context) {
         sharedPreferences =
             context.getSharedPreferences("com.shajt3ch.todomvvm.pref", Context.MODE_PRIVATE)
         appPreferences = AppPreferences(sharedPreferences)
-        token = appPreferences.getAccessToken().toString()
+        token.value = appPreferences.getAccessToken()
         //token = "Bearer ${appPreferences.getAccessToken()}"
 
 
@@ -39,7 +40,7 @@ class SplashViewModel : ViewModel() {
 
 
     fun validateToken() = liveData {
-        val data = validateTokenRepository.validateToken(token)
+        val data = validateTokenRepository.validateToken(token.value.toString())
         emit(data)
     }
 
