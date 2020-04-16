@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.shajt3ch.todomvvm.R
+import com.shajt3ch.todomvvm.viewmodel.todo.TaskViewModel
 import kotlinx.android.synthetic.main.task_fragment.view.*
 
 class TaskFragment : Fragment() {

@@ -2,9 +2,11 @@ package com.shajt3ch.todomvvm.model.remote
 
 import com.shajt3ch.todomvvm.model.remote.request.auth.LoginRequest
 import com.shajt3ch.todomvvm.model.remote.request.auth.RegisterRequest
+import com.shajt3ch.todomvvm.model.remote.request.todo.AddTaskRequest
 import com.shajt3ch.todomvvm.model.remote.response.auth.LoginResponse
 import com.shajt3ch.todomvvm.model.remote.response.auth.RegisterResponse
 import com.shajt3ch.todomvvm.model.remote.response.auth.ValidateResponse
+import com.shajt3ch.todomvvm.model.remote.response.todo.AddTaskResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -25,5 +27,11 @@ interface NetworkService {
 
     @GET(EndPoints.VALIDATE_TOKEN)
     suspend fun validateToken(@Header("Authorization") token: String): Response<ValidateResponse>
+
+    @POST(EndPoints.ADD_TASK)
+    suspend fun addTask(
+        @Header("Authorization") token: String,
+        @Body addTaskRequest: AddTaskRequest
+    ): Response<AddTaskResponse>
 
 }

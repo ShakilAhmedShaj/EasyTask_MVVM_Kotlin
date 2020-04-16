@@ -9,5 +9,6 @@ object EndPoints {
     const val REGISTER = "api/register"
     const val LOGIN = "api/login"
     const val VALIDATE_TOKEN = "api/validate_token"
+    const val ADD_TASK = "api/task/add_task"
 
 }
