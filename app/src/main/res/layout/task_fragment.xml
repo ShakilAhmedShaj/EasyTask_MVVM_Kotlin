@@ -78,7 +78,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner_task" />
 
-    <com.jaredrummler.materialspinner.MaterialSpinner
+    <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/spinner_task"
         android:layout_width="0dp"
         android:layout_height="48dp"
@@ -91,5 +91,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_layout_body" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

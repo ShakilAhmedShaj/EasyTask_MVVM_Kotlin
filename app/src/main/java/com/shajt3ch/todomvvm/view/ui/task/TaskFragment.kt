@@ -35,7 +35,6 @@ class TaskFragment : Fragment() {
         v = inflater.inflate(R.layout.task_fragment, container, false)
 
         resources.getStringArray(R.array.task_status_list).toCollection(taskList)
-        v.spinner_task.setItems(taskList)
 
         v.fab_addTask.setOnClickListener {
             prepareAddTask(v)
@@ -62,8 +61,7 @@ class TaskFragment : Fragment() {
 
         val title = view.txt_title.text.toString()
         val body = view.txt_body.text.toString()
-        val selectedIndex = view.spinner_task.selectedIndex
-        val status = taskList[selectedIndex]
+        val status = view.spinner_task.selectedItem.toString()
 
         val addTaskRequest = AddTaskRequest(userId, title, body, status)
 
