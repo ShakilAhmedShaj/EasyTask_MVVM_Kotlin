@@ -10,5 +10,6 @@ object EndPoints {
     const val LOGIN = "api/login"
     const val VALIDATE_TOKEN = "api/validate_token"
     const val ADD_TASK = "api/task/add_task"
+    const val ALL_TASK = "api/task/get_all_task"
 
 }

@@ -7,6 +7,7 @@ import com.shajt3ch.todomvvm.model.remote.response.auth.LoginResponse
 import com.shajt3ch.todomvvm.model.remote.response.auth.RegisterResponse
 import com.shajt3ch.todomvvm.model.remote.response.auth.ValidateResponse
 import com.shajt3ch.todomvvm.model.remote.response.todo.AddTaskResponse
+import com.shajt3ch.todomvvm.model.remote.response.todo.TaskResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -33,5 +34,8 @@ interface NetworkService {
         @Header("Authorization") token: String,
         @Body addTaskRequest: AddTaskRequest
     ): Response<AddTaskResponse>
+
+    @GET(EndPoints.ALL_TASK)
+    suspend fun getAllTask(@Header("Authorization") token: String): Response<List<TaskResponse>>
 
 }
