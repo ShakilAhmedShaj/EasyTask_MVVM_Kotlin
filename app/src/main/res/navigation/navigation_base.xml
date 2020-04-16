@@ -25,6 +25,6 @@
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.shajt3ch.todomvvm.view.ui.profile.ProfileFragment"
-        android:label="@string/navigation_add_task"
+        android:label="@string/navigation_profile"
         tools:layout="@layout/profile_fragment" />
 </navigation>
