@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class AddTaskRequest(
     @SerializedName("user_id")
-    val userId: String, // 1
+    val userId: Int, // 1
     @SerializedName("title")
     val title: String, // Title 1
     @SerializedName("body")
