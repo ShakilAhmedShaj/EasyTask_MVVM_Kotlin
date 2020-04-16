@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.shajt3ch.todomvvm.R
+import kotlinx.android.synthetic.main.task_fragment.view.*
 
 class TaskFragment : Fragment() {
 
@@ -16,12 +17,20 @@ class TaskFragment : Fragment() {
     }
 
     private lateinit var viewModel: TaskViewModel
+    private val taskList: ArrayList<String> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.task_fragment, container, false)
+
+        val view = inflater.inflate(R.layout.task_fragment, container, false)
+
+        resources.getStringArray(R.array.task_status_list).toCollection(taskList)
+        view.spinner_task.setItems(taskList)
+
+
+        return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
