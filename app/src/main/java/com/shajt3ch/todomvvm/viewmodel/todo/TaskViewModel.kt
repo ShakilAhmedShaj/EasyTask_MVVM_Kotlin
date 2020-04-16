@@ -38,7 +38,6 @@ class TaskViewModel : ViewModel() {
 
     }
 
-
     fun addTask(addTaskRequest: AddTaskRequest) = liveData {
         progress.value = true
 

@@ -40,7 +40,6 @@ class TaskFragment : Fragment() {
             prepareAddTask(v)
         }
 
-
         return v
     }
 
