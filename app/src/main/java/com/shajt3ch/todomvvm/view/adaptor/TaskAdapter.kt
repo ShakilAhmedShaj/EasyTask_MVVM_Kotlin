@@ -33,6 +33,19 @@ class TaskAdapter(private val taskList: ArrayList<TaskResponse>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data: TaskResponse = taskList[position]
+
+        when (data.status) {
+            "PENDING" -> {
+                data.bg_color = R.color.status_pending
+            }
+            "STARTED" -> {
+                data.bg_color = R.color.status_started
+            }
+            else -> {
+                data.bg_color = R.color.status_completed
+            }
+        }
+
         holder.taskListBinding.task = data
     }
 

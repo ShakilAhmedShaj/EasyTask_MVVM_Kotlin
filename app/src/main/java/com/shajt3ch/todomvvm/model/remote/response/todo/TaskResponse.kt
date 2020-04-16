@@ -1,6 +1,8 @@
 package com.shajt3ch.todomvvm.model.remote.response.todo
 
 
+import android.widget.TextView
+import androidx.databinding.BindingAdapter
 import com.google.gson.annotations.SerializedName
 
 data class TaskResponse(
@@ -17,5 +19,18 @@ data class TaskResponse(
     @SerializedName("created_at")
     val createdAt: String, // 2020-04-16 15:25:13
     @SerializedName("updated_at")
-    val updatedAt: String // 2020-04-16 15:25:13
-)
+    val updatedAt: String, // 2020-04-16 15:25:13
+    @SerializedName("bg_color")
+    var bg_color: Int
+) {
+    companion object {
+
+        @JvmStatic
+        @BindingAdapter("viewBackground")
+        fun TextView.setBgColor(color: Int?) {
+            if (color != null) {
+                this.setBackgroundResource(color)
+            }
+        }
+    }
+}
