@@ -2,6 +2,7 @@ package com.shajt3ch.todomvvm.viewmodel.todo
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
@@ -24,6 +25,7 @@ class TaskViewModel : ViewModel() {
     private lateinit var appPreferences: AppPreferences
     private var token: String = ""
     val user_id: MutableLiveData<Int> = MutableLiveData()
+    val progress: MutableLiveData<Boolean> = MutableLiveData()
 
     fun init(context: Context) {
         addTaskRepository = AddTaskRepository(networkService)
@@ -38,8 +40,12 @@ class TaskViewModel : ViewModel() {
 
 
     fun addTask(addTaskRequest: AddTaskRequest) = liveData {
+        progress.value = true
+
         val data = addTaskRepository.addTask(token, addTaskRequest)
         emit(data)
+
+        progress.value = false
     }
 
 

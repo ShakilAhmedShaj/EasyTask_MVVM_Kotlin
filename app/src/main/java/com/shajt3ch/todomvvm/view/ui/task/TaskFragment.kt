@@ -18,30 +18,31 @@ import kotlinx.android.synthetic.main.task_fragment.view.*
 class TaskFragment : Fragment() {
 
     companion object {
-        const val TAG = "TAG"
+        const val TAG = "TaskFragment"
         fun newInstance() = TaskFragment()
     }
 
     private lateinit var viewModel: TaskViewModel
     private val taskList: ArrayList<String> = ArrayList()
     private var userId: Int = 0
+    private lateinit var v: View
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.task_fragment, container, false)
+        v = inflater.inflate(R.layout.task_fragment, container, false)
 
         resources.getStringArray(R.array.task_status_list).toCollection(taskList)
-        view.spinner_task.setItems(taskList)
+        v.spinner_task.setItems(taskList)
 
-        view.fab_addTask.setOnClickListener {
-            prepareAddTask(view)
+        v.fab_addTask.setOnClickListener {
+            prepareAddTask(v)
         }
 
 
-        return view
+        return v
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -52,6 +53,8 @@ class TaskFragment : Fragment() {
         viewModel.user_id.observe(viewLifecycleOwner, Observer {
             userId = it
         })
+
+        observeProgressBar(v)
 
     }
 
@@ -79,6 +82,23 @@ class TaskFragment : Fragment() {
                 Log.e(TAG, "error code : ${it.code()}  message : ${it.errorBody()}")
             }
         })
+    }
+
+    private fun observeProgressBar(view: View) {
+
+        viewModel.progress.observe(viewLifecycleOwner, Observer {
+
+            if (it) {
+
+                view.progressBar.visibility = View.VISIBLE
+
+            } else {
+                view.progressBar.visibility = View.GONE
+
+            }
+
+        })
+
     }
 
 }
