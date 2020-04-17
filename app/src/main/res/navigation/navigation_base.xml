@@ -33,7 +33,7 @@
     <fragment
         android:id="@+id/taskDetailFragment"
         android:name="com.shajt3ch.todomvvm.view.ui.task.detail.TaskDetailFragment"
-        android:label="task_detail_fragment"
+        android:label="Task Detail"
         tools:layout="@layout/task_detail_fragment">
         <argument
             android:name="date_time"
