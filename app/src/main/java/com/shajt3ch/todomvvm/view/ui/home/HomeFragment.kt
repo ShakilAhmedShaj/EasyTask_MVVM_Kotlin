@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -101,6 +102,20 @@ class HomeFragment : Fragment(), TaskCallBack {
         if (isLongClick) {
             Log.e(TAG, "Position: $position is a long click")
         } else {
+
+            val data = viewModel.taskList.value?.get(position)
+
+            findNavController().navigate(
+                HomeFragmentDirections.actionNavigationHomeToTaskDetailFragment(
+                    data?.createdAt.toString(),
+                    data?.title.toString(),
+                    data?.body.toString(),
+                    data?.status.toString(),
+                    data?.userId.toString(),
+                    data?.bg_color.toString(),
+                    data?.id.toString()
+                )
+            )
             Log.e(TAG, "Position: $position is a single click")
         }
 
