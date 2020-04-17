@@ -1,6 +1,7 @@
 package com.shajt3ch.todomvvm.view.adaptor
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +16,8 @@ import com.shajt3ch.todomvvm.model.remote.response.todo.TaskResponse
 class TaskAdapter(private val taskList: ArrayList<TaskResponse>) :
     RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
 
+
+    private lateinit var taskCallBack: TaskCallBack
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -47,10 +50,45 @@ class TaskAdapter(private val taskList: ArrayList<TaskResponse>) :
         }
 
         holder.taskListBinding.task = data
+
+        holder.setTaskCallBack(taskCallBack)
     }
 
-    class ViewHolder(binding: CustomTaskListViewBinding) : RecyclerView.ViewHolder(binding.root) {
+    fun setTaskCallBack(taskCallBack: TaskCallBack) {
+        this.taskCallBack = taskCallBack
+    }
+
+    class ViewHolder(binding: CustomTaskListViewBinding) : RecyclerView.ViewHolder(binding.root),
+        View.OnClickListener, View.OnLongClickListener {
         var taskListBinding: CustomTaskListViewBinding = binding
+
+        private lateinit var taskCallBack: TaskCallBack
+
+        init {
+            taskListBinding.root.setOnClickListener(this)
+            taskListBinding.root.setOnLongClickListener(this)
+        }
+
+        fun setTaskCallBack(taskCallBack: TaskCallBack) {
+            this.taskCallBack = taskCallBack
+        }
+
+        override fun onClick(v: View?) {
+
+            if (v != null) {
+                taskCallBack.onTaskClick(v, adapterPosition, false)
+            }
+
+        }
+
+        override fun onLongClick(v: View?): Boolean {
+
+            if (v != null) {
+                taskCallBack.onTaskClick(v, adapterPosition, true)
+            }
+            return false
+        }
+
     }
 
 

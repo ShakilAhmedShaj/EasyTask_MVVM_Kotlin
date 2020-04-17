@@ -16,9 +16,10 @@ import com.shajt3ch.todomvvm.R
 import com.shajt3ch.todomvvm.databinding.HomeFragmentBinding
 import com.shajt3ch.todomvvm.model.remote.response.todo.TaskResponse
 import com.shajt3ch.todomvvm.view.adaptor.TaskAdapter
+import com.shajt3ch.todomvvm.view.adaptor.TaskCallBack
 import com.shajt3ch.todomvvm.viewmodel.home.HomeViewModel
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), TaskCallBack {
 
     companion object {
         fun newInstance() = HomeFragment()
@@ -90,6 +91,18 @@ class HomeFragment : Fragment() {
 
         taskAdapter = TaskAdapter(taskList)
         recyclerView.adapter = taskAdapter
+
+        taskAdapter.setTaskCallBack(this)
+
+    }
+
+    override fun onTaskClick(view: View, position: Int, isLongClick: Boolean) {
+
+        if (isLongClick) {
+            Log.e(TAG, "Position: $position is a long click")
+        } else {
+            Log.e(TAG, "Position: $position is a single click")
+        }
 
     }
 
