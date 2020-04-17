@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_profileFragment"
             app:destination="@id/navigation_profile" />
+        <action
+            android:id="@+id/action_navigation_home_to_taskDetailFragment"
+            app:destination="@id/taskDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_add_task"
@@ -27,4 +30,29 @@
         android:name="com.shajt3ch.todomvvm.view.ui.profile.ProfileFragment"
         android:label="@string/navigation_profile"
         tools:layout="@layout/profile_fragment" />
+    <fragment
+        android:id="@+id/taskDetailFragment"
+        android:name="com.shajt3ch.todomvvm.view.ui.task.detail.TaskDetailFragment"
+        android:label="task_detail_fragment"
+        tools:layout="@layout/task_detail_fragment">
+        <argument
+            android:name="date_time"
+            app:argType="string" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="body"
+            app:argType="string" />
+        <argument
+            android:name="status"
+            app:argType="string" />
+        <argument
+            android:name="user_id"
+            app:argType="string" />
+        <argument
+            android:name="status_color"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 </navigation>
