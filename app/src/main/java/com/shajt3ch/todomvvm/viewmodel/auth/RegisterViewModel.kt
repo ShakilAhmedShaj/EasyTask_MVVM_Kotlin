@@ -1,5 +1,6 @@
 package com.shajt3ch.todomvvm.viewmodel.auth
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.shajt3ch.todomvvm.BuildConfig
@@ -21,10 +22,14 @@ class RegisterViewModel : ViewModel() {
     private val networkService = Networking.create(BuildConfig.BASE_URL)
     private val registerRepository = RegisterRepository(networkService)
 
+    val progress: MutableLiveData<Boolean> = MutableLiveData()
+
     fun register(registerRequest: RegisterRequest) = liveData(IO) {
 
+        progress.postValue(true)
         val data = registerRepository.register(registerRequest)
         emit(data)
+        progress.postValue(false)
     }
 
 }

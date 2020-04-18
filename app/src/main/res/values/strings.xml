@@ -62,6 +62,11 @@
     <string name="name">Name</string>
     <string name="bio">Bio</string>
 
+    <string name="success_sign_up_title">Congratulations !</string>
+    <string name="success_sign_up_msg">Registration Successful. Please Login.</string>
+    <string name="error_sign_up_title">Sorry!</string>
+    <string name="error_sign_up_msg">Registration Failed. Please Try Again!</string>
+
 
     <string-array name="task_status_list">
         <item>PENDING</item>

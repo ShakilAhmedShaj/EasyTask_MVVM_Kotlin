@@ -3,6 +3,7 @@ package com.shajt3ch.todomvvm.view.ui.auth
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.shajt3ch.todomvvm.R
@@ -29,6 +30,10 @@ class SignUpActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
 
         btn_sign_up.onClick { prepareSignUp() }
+
+        viewModel.progress.observe(this, Observer {
+            pb_reg.visibility = if (it) View.VISIBLE else View.GONE
+        })
 
         tv_login.onClick { launchLoginActivity() }
     }
@@ -107,6 +112,8 @@ class SignUpActivity : AppCompatActivity() {
                 val signUpData = RegisterRequest(name, email, password, confirmPassword)
 
                 signUp(signUpData)
+
+
             }
         }
 
@@ -120,9 +127,32 @@ class SignUpActivity : AppCompatActivity() {
 
                 val data = data.body()
 
+
+                alert {
+                    isCancelable = false
+                    title = getString(R.string.success_sign_up_title)
+                    message = getString(R.string.success_sign_up_msg)
+                    positiveButton("OK") {
+                        it.dismiss()
+
+                        startActivity(intentFor<LoginActivity>())
+                    }
+                }.show()
+
+
+
                 Log.d(TAG, "Name : ${data?.user_name}  message : ${data?.email}")
 
             } else {
+
+                alert {
+                    isCancelable = false
+                    title = getString(R.string.error_sign_up_title)
+                    message = getString(R.string.error_sign_up_msg)
+                    positiveButton("OK") {
+                        it.dismiss()
+                    }
+                }.show()
 
                 Log.e(TAG, "error code : ${data.code()}  message : ${data.errorBody()}")
 
