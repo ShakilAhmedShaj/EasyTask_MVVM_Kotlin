@@ -3,10 +3,12 @@ package com.shajt3ch.todomvvm.model.remote
 import com.shajt3ch.todomvvm.model.remote.request.auth.LoginRequest
 import com.shajt3ch.todomvvm.model.remote.request.auth.RegisterRequest
 import com.shajt3ch.todomvvm.model.remote.request.todo.AddTaskRequest
+import com.shajt3ch.todomvvm.model.remote.request.todo.EditTaskRequest
 import com.shajt3ch.todomvvm.model.remote.response.auth.LoginResponse
 import com.shajt3ch.todomvvm.model.remote.response.auth.RegisterResponse
 import com.shajt3ch.todomvvm.model.remote.response.auth.ValidateResponse
 import com.shajt3ch.todomvvm.model.remote.response.todo.AddTaskResponse
+import com.shajt3ch.todomvvm.model.remote.response.todo.EditTaskResponse
 import com.shajt3ch.todomvvm.model.remote.response.todo.TaskResponse
 import retrofit2.Response
 import retrofit2.http.Body
@@ -37,5 +39,12 @@ interface NetworkService {
 
     @GET(EndPoints.ALL_TASK)
     suspend fun getAllTask(@Header("Authorization") token: String): Response<List<TaskResponse>>
+
+
+    @POST(EndPoints.EDIT_TASK)
+    suspend fun editTask(
+        @Header("Authorization") token: String,
+        @Body editTaskRequest: EditTaskRequest
+    ): Response<EditTaskResponse>
 
 }

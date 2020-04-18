@@ -1,4 +1,4 @@
-package com.shajt3ch.todomvvm.view.ui.task.detail
+package com.shajt3ch.todomvvm.viewmodel.task
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

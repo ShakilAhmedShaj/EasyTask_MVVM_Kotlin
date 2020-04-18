@@ -1,7 +1,7 @@
 package com.shajt3ch.todomvvm.view.ui.task.edit
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 
 import com.shajt3ch.todomvvm.R
+import com.shajt3ch.todomvvm.viewmodel.task.EditTaskViewModel
 import kotlinx.android.synthetic.main.edit_task_fragment.*
 
 class EditTaskFragment : Fragment() {
@@ -31,6 +32,7 @@ class EditTaskFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(EditTaskViewModel::class.java)
+        viewModel.init(context!!)
 
         resources.getStringArray(R.array.task_status_list).toCollection(viewModel.taskList)
 
@@ -40,6 +42,24 @@ class EditTaskFragment : Fragment() {
         viewModel.title.value = args.taskTitle
         viewModel.body.value = args.taskBody
         viewModel.status.value = args.taskStatus
+
+        observeData()
+
+        fab_editTask.setOnClickListener {
+            viewModel.status.value = edit_spinner_task.selectedItem.toString()
+            //viewModel.title.value = edit_title.text.toString()
+            //viewModel.body.value = edit_body.text.toString()
+
+            viewModel.editTask().observe(viewLifecycleOwner, Observer {
+
+                if (it.code() == 201) {
+                    Log.e(TAG, "${it.body()}")
+                } else {
+                    Log.e(TAG, "${it.errorBody()}")
+                }
+
+            })
+        }
 
         observeData()
     }

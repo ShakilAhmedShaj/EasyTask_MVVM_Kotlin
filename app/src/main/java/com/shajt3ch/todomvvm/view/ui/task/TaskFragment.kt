@@ -1,6 +1,5 @@
 package com.shajt3ch.todomvvm.view.ui.task
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 
 import com.shajt3ch.todomvvm.R
 import com.shajt3ch.todomvvm.model.remote.request.todo.AddTaskRequest
-import com.shajt3ch.todomvvm.viewmodel.todo.TaskViewModel
+import com.shajt3ch.todomvvm.viewmodel.task.TaskViewModel
 import kotlinx.android.synthetic.main.task_fragment.*
 import kotlinx.android.synthetic.main.task_fragment.view.*
 import kotlinx.android.synthetic.main.task_fragment.view.txt_body

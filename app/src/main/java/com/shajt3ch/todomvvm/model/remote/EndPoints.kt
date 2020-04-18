@@ -11,5 +11,6 @@ object EndPoints {
     const val VALIDATE_TOKEN = "api/validate_token"
     const val ADD_TASK = "api/task/add_task"
     const val ALL_TASK = "api/task/get_all_task"
+    const val EDIT_TASK = "api/task/update_task"
 
 }

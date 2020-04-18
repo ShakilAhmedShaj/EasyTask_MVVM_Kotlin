@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 
 import com.shajt3ch.todomvvm.R
+import com.shajt3ch.todomvvm.viewmodel.task.TaskDetailViewModel
 import kotlinx.android.synthetic.main.task_detail_fragment.*
 
 class TaskDetailFragment : Fragment() {
@@ -39,6 +40,7 @@ class TaskDetailFragment : Fragment() {
         viewModel.status.value = args.status
         viewModel.userId.value = args.userId
         viewModel.bgColor.value = args.statusColor
+        viewModel.id.value = args.id
 
         observerData()
 

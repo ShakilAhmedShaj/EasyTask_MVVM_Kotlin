@@ -1,8 +1,7 @@
-package com.shajt3ch.todomvvm.viewmodel.todo
+package com.shajt3ch.todomvvm.viewmodel.task
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
