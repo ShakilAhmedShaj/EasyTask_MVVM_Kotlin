@@ -8,7 +8,7 @@ import android.os.Build
 
 object NetworkHelper {
 
-    fun insNetworkConnected(context: Context): Boolean{
+    fun isNetworkConnected(context: Context): Boolean{
         var result = false
         (context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).apply {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

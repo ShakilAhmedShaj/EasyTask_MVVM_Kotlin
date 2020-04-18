@@ -2,7 +2,7 @@
 <network-security-config>
     <domain-config cleartextTrafficPermitted = "true">
         <domain includeSubdomains = "true">
-            192.168.10.10
+            mrmed.com.bd
         </domain>
     </domain-config>
 </network-security-config>

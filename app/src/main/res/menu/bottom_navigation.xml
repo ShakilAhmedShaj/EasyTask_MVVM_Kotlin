@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/navigation_home" />
+    <item
+        android:id="@+id/navigation_add_task"
+        android:icon="@drawable/ic_add"
+        android:title="@string/navigation_add_task" />
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/ic_profile"
+        android:title="@string/navigation_profile" />
+</menu>

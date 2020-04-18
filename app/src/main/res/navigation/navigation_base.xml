@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_base"
+    app:startDestination="@id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.shajt3ch.todomvvm.view.ui.home.HomeFragment"
+        android:label="@string/navigation_home"
+        tools:layout="@layout/home_fragment">
+        <action
+            android:id="@+id/action_homeFragment_to_taskFragment"
+            app:destination="@id/navigation_add_task" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/navigation_profile" />
+        <action
+            android:id="@+id/action_navigation_home_to_taskDetailFragment"
+            app:destination="@id/taskDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_add_task"
+        android:name="com.shajt3ch.todomvvm.view.ui.task.TaskFragment"
+        android:label="@string/navigation_add_task"
+        tools:layout="@layout/task_fragment" />
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.shajt3ch.todomvvm.view.ui.profile.ProfileFragment"
+        android:label="@string/navigation_profile"
+        tools:layout="@layout/profile_fragment" />
+    <fragment
+        android:id="@+id/taskDetailFragment"
+        android:name="com.shajt3ch.todomvvm.view.ui.task.detail.TaskDetailFragment"
+        android:label="Task Detail"
+        tools:layout="@layout/task_detail_fragment">
+        <argument
+            android:name="date_time"
+            app:argType="string" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="body"
+            app:argType="string" />
+        <argument
+            android:name="status"
+            app:argType="string" />
+        <argument
+            android:name="user_id"
+            app:argType="string" />
+        <argument
+            android:name="status_color"
+            app:argType="string"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_taskDetailFragment_to_editTaskFragment"
+            app:destination="@id/editTaskFragment" />
+        <argument
+            android:name="id"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/editTaskFragment"
+        android:name="com.shajt3ch.todomvvm.view.ui.task.edit.EditTaskFragment"
+        android:label="Edit Task"
+        tools:layout="@layout/edit_task_fragment">
+        <argument
+            android:name="task_id"
+            app:argType="string" />
+        <argument
+            android:name="task_title"
+            app:argType="string" />
+        <argument
+            android:name="task_body"
+            app:argType="string" />
+        <argument
+            android:name="task_status"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_editTaskFragment_to_taskDetailFragment2"
+            app:destination="@id/taskDetailFragment" />
+        <action
+            android:id="@+id/action_editTaskFragment_to_navigation_home"
+            app:destination="@id/navigation_home"
+            app:popUpTo="@id/taskDetailFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>

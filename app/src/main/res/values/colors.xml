@@ -6,7 +6,13 @@
     <color name="colorAccent">#C3F0CA</color>
 
     <color name="black">#000000</color>
-    <color name="white">#ffffff</color>
+    <color name="white">#FFFFFF</color>
+    <color name="tab_text_unselected">#FCF7F7</color>
     <color name="blue_dark">#1C57AF</color>
     <color name="dark_pink">#E91E63</color>
+
+    <color name="status_pending">#E80E0E</color>
+    <color name="status_started">#2196F3</color>
+    <color name="status_completed">#4CAF50</color>
+    <color name="green">#C3F0CA</color>
 </resources>

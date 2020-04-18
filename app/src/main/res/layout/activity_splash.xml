@@ -6,19 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".view.ui.splash.SplashActivity">
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="370dp"
+        android:layout_height="326dp"
 
-    <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/gif_fishing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/fishing_splash"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="165dp"
+        android:layout_marginEnd="21dp"
+
+        android:layout_marginBottom="240dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/note_anim" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

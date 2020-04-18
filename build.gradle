@@ -11,7 +11,7 @@ buildscript {
 
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.2'
+        classpath 'com.android.tools.build:gradle:3.6.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
 
@@ -44,4 +44,5 @@ ext {
     glide_version = "4.11.0"
     imagepicker = "1.6"
     inline_activity_result_kotlin = "1.0.1"
+    lottieVersion = "3.4.0"
 }
