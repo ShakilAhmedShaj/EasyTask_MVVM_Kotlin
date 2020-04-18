@@ -32,6 +32,9 @@ class EditTaskFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(EditTaskViewModel::class.java)
 
+        resources.getStringArray(R.array.task_status_list).toCollection(viewModel.taskList)
+
+
         val args = EditTaskFragmentArgs.fromBundle(arguments!!)
         viewModel.id.value = args.taskId
         viewModel.title.value = args.taskTitle
@@ -57,6 +60,10 @@ class EditTaskFragment : Fragment() {
         })
 
         viewModel.status.observe(viewLifecycleOwner, Observer {
+
+            viewModel.getIndexFromTaskList()
+
+            edit_spinner_task.setSelection(viewModel.index.value!!)
 
         })
 

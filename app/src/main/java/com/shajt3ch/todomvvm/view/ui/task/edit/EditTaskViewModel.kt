@@ -14,6 +14,13 @@ class EditTaskViewModel : ViewModel() {
     val title: MutableLiveData<String> = MutableLiveData()
     val body: MutableLiveData<String> = MutableLiveData()
     val status: MutableLiveData<String> = MutableLiveData()
+    val index: MutableLiveData<Int> = MutableLiveData()
+    val taskList: ArrayList<String> = ArrayList()
 
+
+    fun getIndexFromTaskList() {
+
+        index.value = taskList.indexOf(status.value)
+    }
 
 }
