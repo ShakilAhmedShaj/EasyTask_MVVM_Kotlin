@@ -13,7 +13,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.shajt3ch.todomvvm.R
 import com.shajt3ch.todomvvm.model.remote.request.todo.AddTaskRequest
 import com.shajt3ch.todomvvm.viewmodel.todo.TaskViewModel
+import kotlinx.android.synthetic.main.task_fragment.*
 import kotlinx.android.synthetic.main.task_fragment.view.*
+import kotlinx.android.synthetic.main.task_fragment.view.txt_body
+import kotlinx.android.synthetic.main.task_fragment.view.txt_title
+import org.jetbrains.anko.support.v4.alert
 
 class TaskFragment : Fragment() {
 
@@ -74,9 +78,33 @@ class TaskFragment : Fragment() {
             if (it.code() == 201) {
                 val data = it.body()
 
+                alert {
+                    title = getString(R.string.title_success_dialog)
+                    message = getString(R.string.msg_add_post_success)
+                    isCancelable = false
+                    positiveButton(getString(R.string.btn_ok)) { dialog ->
+                        //clear the edit text
+                        txt_title.text?.clear()
+                        txt_body.text?.clear()
+
+                        dialog.dismiss()
+                    }
+                }.show()
+
                 Log.d(TAG, "${data?.title} ${data?.body}")
             } else {
-                Log.e(TAG, "error code : ${it.code()}  message : ${it.errorBody()}")
+                val errorMsg = "error code: ${it.code()} error message: ${it.errorBody()}"
+
+                alert {
+                    title = getString(R.string.title_error_dialog)
+                    message = errorMsg
+                    isCancelable = false
+                    positiveButton(getString(R.string.btn_ok)) { dialog ->
+                        dialog.dismiss()
+                    }
+                }.show()
+
+                Log.e(TAG, "error code: ${it.code()} error message: ${it.errorBody()}")
             }
         })
     }
