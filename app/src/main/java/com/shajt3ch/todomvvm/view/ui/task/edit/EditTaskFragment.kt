@@ -102,7 +102,7 @@ class EditTaskFragment : Fragment() {
             message = getString(R.string.alert_edit_success_msg)
             positiveButton("OK") {
                 it.dismiss()
-                //findNavController().navigate(EditTaskFragmentDirections.actionEditTaskFragmentToNavigationHome())
+                findNavController().navigate(EditTaskFragmentDirections.actionEditTaskFragmentToNavigationHome())
             }
         }.show()
     }
