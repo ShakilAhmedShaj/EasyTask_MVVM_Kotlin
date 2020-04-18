@@ -82,7 +82,7 @@
             android:id="@+id/action_editTaskFragment_to_taskDetailFragment2"
             app:destination="@id/taskDetailFragment" />
         <action
-            android:id="@+id/action_editTaskFragment_to_navigation_home2"
+            android:id="@+id/action_editTaskFragment_to_navigation_home"
             app:destination="@id/navigation_home"
             app:popUpTo="@id/taskDetailFragment"
             app:popUpToInclusive="true" />

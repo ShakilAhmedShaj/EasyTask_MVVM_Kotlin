@@ -99,9 +99,7 @@ class EditTaskFragment : Fragment() {
                 it.dismiss()
 
 
-                // findNavController().navigate(EditTaskFragmentDirections.actionEditTaskFragmentToNavigationHome())
-
-                findNavController().navigate(EditTaskFragmentDirections.actionEditTaskFragmentToNavigationHome2())
+                findNavController().navigate(EditTaskFragmentDirections.actionEditTaskFragmentToNavigationHome())
             }
         }.show()
     }

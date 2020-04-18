@@ -58,12 +58,12 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:clickable="true"
-        android:src="@drawable/ic_add"
+        android:focusable="true"
+        android:src="@drawable/ic_save"
         app:backgroundTint="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner_task"
-        app:tint="@color/white"
-        android:focusable="true" />
+        app:tint="@color/black" />
 
     <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/progressBar"
