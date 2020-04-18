@@ -52,16 +52,7 @@ class EditTaskFragment : Fragment() {
             //viewModel.title.value = edit_title.text.toString()
             //viewModel.body.value = edit_body.text.toString()
 
-            viewModel.editTask().observe(viewLifecycleOwner, Observer {
-
-                if (it.code() == 201) {
-                    successDialog()
-                    Log.e(TAG, "${it.body()}")
-                } else {
-                    errorDialog()
-                    Log.e(TAG, "${it.errorBody()}")
-                }
-            })
+            viewModel.editTask()
         }
 
         observeData()
@@ -93,6 +84,14 @@ class EditTaskFragment : Fragment() {
 
             pb_editTask.visibility = if (it) View.VISIBLE else View.GONE
         })
+
+        viewModel.isSuccess.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                successDialog()
+            } else {
+                errorDialog()
+            }
+        })
     }
 
     private fun successDialog() {
@@ -100,9 +99,12 @@ class EditTaskFragment : Fragment() {
             isCancelable = false
             title = getString(R.string.alert_success_title)
             message = getString(R.string.alert_edit_success_msg)
+
             positiveButton("OK") {
+
                 it.dismiss()
-                findNavController().navigate(EditTaskFragmentDirections.actionEditTaskFragmentToNavigationHome())
+
+                //findNavController().navigate(EditTaskFragmentDirections.actionEditTaskFragmentToNavigationHome())
             }
         }.show()
     }

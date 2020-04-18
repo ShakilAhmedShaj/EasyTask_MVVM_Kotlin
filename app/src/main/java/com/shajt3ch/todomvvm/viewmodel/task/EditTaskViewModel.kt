@@ -2,6 +2,7 @@ package com.shajt3ch.todomvvm.viewmodel.task
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
@@ -10,6 +11,10 @@ import com.shajt3ch.todomvvm.model.local.AppPreferences
 import com.shajt3ch.todomvvm.model.remote.Networking
 import com.shajt3ch.todomvvm.model.remote.request.todo.EditTaskRequest
 import com.shajt3ch.todomvvm.model.repository.EditTaskRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
 class EditTaskViewModel : ViewModel() {
 
@@ -32,8 +37,8 @@ class EditTaskViewModel : ViewModel() {
     val index: MutableLiveData<Int> = MutableLiveData()
     val taskList: ArrayList<String> = ArrayList()
     val user_id: MutableLiveData<Int> = MutableLiveData()
-
     val loading: MutableLiveData<Boolean> = MutableLiveData()
+    val isSuccess: MutableLiveData<Boolean> = MutableLiveData()
 
     fun init(context: Context) {
         editTaskRepository = EditTaskRepository(networkService)
@@ -52,20 +57,36 @@ class EditTaskViewModel : ViewModel() {
         index.value = taskList.indexOf(status.value)
     }
 
-    fun editTask() = liveData {
-        loading.postValue(true)
-        val data = editTaskRepository.editTask(
-            token, EditTaskRequest(
-                id.value!!.toInt(),
-                user_id.value.toString(),
-                title.value.toString(),
-                body.value.toString(),
-                status.value.toString()
-            )
-        )
-        emit(data)
-        loading.postValue(false)
 
+    fun editTask() {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                loading.postValue(true)
+                val data = editTaskRepository.editTask(
+                    token, EditTaskRequest(
+                        id.value!!.toInt(),
+                        user_id.value.toString(),
+                        title.value.toString(),
+                        body.value.toString(),
+                        status.value.toString()
+                    )
+                )
+                if (data.code() == 201) {
+                    isSuccess.postValue(true)
+                } else {
+                    isSuccess.postValue(false)
+                }
+
+                loading.postValue(false)
+
+            } catch (httpException: HttpException) {
+                Log.e(TAG, httpException.toString())
+
+            } catch (exception: Exception) {
+                Log.e(TAG, exception.toString())
+            }
+
+        }
 
     }
 
