@@ -18,8 +18,8 @@ import org.jetbrains.anko.support.v4.alert
 class EditTaskFragment : Fragment() {
 
     companion object {
-        fun newInstance() = EditTaskFragment()
         const val TAG = "EditTaskFragment"
+        fun newInstance() = EditTaskFragment()
     }
 
     private lateinit var viewModel: EditTaskViewModel
@@ -35,9 +35,7 @@ class EditTaskFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(EditTaskViewModel::class.java)
         viewModel.init(context!!)
-
         resources.getStringArray(R.array.task_status_list).toCollection(viewModel.taskList)
-
 
         val args = EditTaskFragmentArgs.fromBundle(arguments!!)
         viewModel.id.value = args.taskId
@@ -45,17 +43,18 @@ class EditTaskFragment : Fragment() {
         viewModel.body.value = args.taskBody
         viewModel.status.value = args.taskStatus
 
-        observeData()
 
         fab_editTask.setOnClickListener {
             viewModel.status.value = edit_spinner_task.selectedItem.toString()
-            //viewModel.title.value = edit_title.text.toString()
-            //viewModel.body.value = edit_body.text.toString()
-
+            viewModel.title.value = edit_title.text.toString()
+            viewModel.body.value = edit_body.text.toString()
             viewModel.editTask()
         }
 
+
         observeData()
+
+
     }
 
     private fun observeData() {
@@ -74,14 +73,11 @@ class EditTaskFragment : Fragment() {
         })
 
         viewModel.status.observe(viewLifecycleOwner, Observer {
-
             viewModel.getIndexFromTaskList()
-
             edit_spinner_task.setSelection(viewModel.index.value!!)
-
         })
-        viewModel.loading.observe(viewLifecycleOwner, Observer {
 
+        viewModel.loading.observe(viewLifecycleOwner, Observer {
             pb_editTask.visibility = if (it) View.VISIBLE else View.GONE
         })
 
@@ -99,12 +95,13 @@ class EditTaskFragment : Fragment() {
             isCancelable = false
             title = getString(R.string.alert_success_title)
             message = getString(R.string.alert_edit_success_msg)
-
             positiveButton("OK") {
-
                 it.dismiss()
 
-                //findNavController().navigate(EditTaskFragmentDirections.actionEditTaskFragmentToNavigationHome())
+
+                // findNavController().navigate(EditTaskFragmentDirections.actionEditTaskFragmentToNavigationHome())
+
+                findNavController().navigate(EditTaskFragmentDirections.actionEditTaskFragmentToNavigationHome2())
             }
         }.show()
     }
@@ -119,4 +116,6 @@ class EditTaskFragment : Fragment() {
             }
         }.show()
     }
+
+
 }
