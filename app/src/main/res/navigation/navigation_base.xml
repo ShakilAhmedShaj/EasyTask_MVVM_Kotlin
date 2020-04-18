@@ -54,5 +54,29 @@
             android:name="status_color"
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_taskDetailFragment_to_editTaskFragment"
+            app:destination="@id/editTaskFragment" />
+        <argument
+            android:name="id"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/editTaskFragment"
+        android:name="com.shajt3ch.todomvvm.view.ui.task.edit.EditTaskFragment"
+        android:label="Edit Task"
+        tools:layout="@layout/edit_task_fragment">
+        <argument
+            android:name="task_id"
+            app:argType="string" />
+        <argument
+            android:name="task_title"
+            app:argType="string" />
+        <argument
+            android:name="task_body"
+            app:argType="string" />
+        <argument
+            android:name="task_status"
+            app:argType="string" />
     </fragment>
 </navigation>

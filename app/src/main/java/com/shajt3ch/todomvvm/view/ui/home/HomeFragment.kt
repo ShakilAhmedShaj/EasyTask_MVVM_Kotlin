@@ -112,7 +112,8 @@ class HomeFragment : Fragment(), TaskCallBack {
                     data?.body.toString(),
                     data?.status.toString(),
                     data?.userId.toString(),
-                    data?.bg_color.toString()
+                    data?.bg_color.toString(),
+                    data?.id.toString()
 
                 )
             )

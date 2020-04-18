@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 
 import com.shajt3ch.todomvvm.R
 import kotlinx.android.synthetic.main.task_detail_fragment.*
@@ -40,9 +41,23 @@ class TaskDetailFragment : Fragment() {
         viewModel.bgColor.value = args.statusColor
 
         observerData()
+
+        fb_edit.setOnClickListener {
+            findNavController().navigate(
+                TaskDetailFragmentDirections.actionTaskDetailFragmentToEditTaskFragment(
+                    viewModel.id.value.toString(),
+                    viewModel.title.value.toString(),
+                    viewModel.body.value.toString(),
+                    viewModel.status.value.toString()
+                )
+            )
+        }
     }
 
     private fun observerData() {
+        viewModel.id.observe(viewLifecycleOwner, Observer {
+
+        })
 
         viewModel.dataTime.observe(viewLifecycleOwner, Observer {
             tv_date_time.text = it
