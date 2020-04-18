@@ -33,6 +33,8 @@ class TaskDetailFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(TaskDetailViewModel::class.java)
 
+        viewModel.init(context!!)
+
         val args = TaskDetailFragmentArgs.fromBundle(arguments!!)
         viewModel.dataTime.value = args.dateTime
         viewModel.title.value = args.title
@@ -41,6 +43,8 @@ class TaskDetailFragment : Fragment() {
         viewModel.userId.value = args.userId
         viewModel.bgColor.value = args.statusColor
         viewModel.id.value = args.id
+
+        viewModel.checkUserId()
 
         observerData()
 
@@ -83,6 +87,11 @@ class TaskDetailFragment : Fragment() {
         viewModel.bgColor.observe(viewLifecycleOwner, Observer {
             status_color.setBackgroundResource(it.toInt())
 
+        })
+
+        viewModel.isEditable.observe(viewLifecycleOwner, Observer {
+
+            fb_edit.visibility = if (it) View.VISIBLE else View.GONE
         })
 
 
