@@ -28,6 +28,8 @@ class HomeViewModel : ViewModel() {
 
     val taskList: MutableLiveData<List<TaskResponse>> = MutableLiveData()
 
+    val progress: MutableLiveData<Boolean> = MutableLiveData()
+
 
     fun init(context: Context) {
         taskRepository = TaskRepository(networkService)
@@ -44,6 +46,8 @@ class HomeViewModel : ViewModel() {
 
     fun getAllTask() = liveData {
 
+        progress.postValue(true)
+
         val data = taskRepository.getAllTask(token)
 
         if (data.code() == 200) {
@@ -51,6 +55,7 @@ class HomeViewModel : ViewModel() {
         }
 
         emit(data)
+        progress.postValue(false)
 
     }
 

@@ -33,6 +33,8 @@ class EditTaskViewModel : ViewModel() {
     val taskList: ArrayList<String> = ArrayList()
     val user_id: MutableLiveData<Int> = MutableLiveData()
 
+    val loading: MutableLiveData<Boolean> = MutableLiveData()
+
     fun init(context: Context) {
         editTaskRepository = EditTaskRepository(networkService)
         sharedPreferences =
@@ -51,6 +53,7 @@ class EditTaskViewModel : ViewModel() {
     }
 
     fun editTask() = liveData {
+        loading.postValue(true)
         val data = editTaskRepository.editTask(
             token, EditTaskRequest(
                 id.value!!.toInt(),
@@ -61,6 +64,9 @@ class EditTaskViewModel : ViewModel() {
             )
         )
         emit(data)
+        loading.postValue(false)
+
+
     }
 
 }

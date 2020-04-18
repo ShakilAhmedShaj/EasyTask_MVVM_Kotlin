@@ -19,6 +19,7 @@ import com.shajt3ch.todomvvm.model.remote.response.todo.TaskResponse
 import com.shajt3ch.todomvvm.view.adaptor.TaskAdapter
 import com.shajt3ch.todomvvm.view.adaptor.TaskCallBack
 import com.shajt3ch.todomvvm.viewmodel.home.HomeViewModel
+import kotlinx.android.synthetic.main.home_fragment.*
 
 class HomeFragment : Fragment(), TaskCallBack {
 
@@ -59,6 +60,10 @@ class HomeFragment : Fragment(), TaskCallBack {
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
         viewModel.init(context!!)
+
+        viewModel.progress.observe(viewLifecycleOwner, Observer {
+            pb_home.visibility = if (it) View.VISIBLE else View.GONE
+        })
 
         getAllTask()
     }

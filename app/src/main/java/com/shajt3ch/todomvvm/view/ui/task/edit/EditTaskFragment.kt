@@ -8,10 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 
 import com.shajt3ch.todomvvm.R
 import com.shajt3ch.todomvvm.viewmodel.task.EditTaskViewModel
 import kotlinx.android.synthetic.main.edit_task_fragment.*
+import org.jetbrains.anko.support.v4.alert
 
 class EditTaskFragment : Fragment() {
 
@@ -53,11 +55,12 @@ class EditTaskFragment : Fragment() {
             viewModel.editTask().observe(viewLifecycleOwner, Observer {
 
                 if (it.code() == 201) {
+                    successDialog()
                     Log.e(TAG, "${it.body()}")
                 } else {
+                    errorDialog()
                     Log.e(TAG, "${it.errorBody()}")
                 }
-
             })
         }
 
@@ -86,8 +89,32 @@ class EditTaskFragment : Fragment() {
             edit_spinner_task.setSelection(viewModel.index.value!!)
 
         })
+        viewModel.loading.observe(viewLifecycleOwner, Observer {
 
-
+            pb_editTask.visibility = if (it) View.VISIBLE else View.GONE
+        })
     }
 
+    private fun successDialog() {
+        alert {
+            isCancelable = false
+            title = getString(R.string.alert_success_title)
+            message = getString(R.string.alert_edit_success_msg)
+            positiveButton("OK") {
+                it.dismiss()
+                //findNavController().navigate(EditTaskFragmentDirections.actionEditTaskFragmentToNavigationHome())
+            }
+        }.show()
+    }
+
+    private fun errorDialog() {
+        alert {
+            isCancelable = false
+            title = getString(R.string.alert_error_title)
+            message = getString(R.string.alert_error_msg)
+            positiveButton("OK") {
+                it.dismiss()
+            }
+        }.show()
+    }
 }
