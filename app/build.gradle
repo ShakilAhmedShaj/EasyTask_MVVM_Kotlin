@@ -93,6 +93,7 @@ dependencies {
 
     //https://github.com/bumptech/glide
     implementation "com.github.bumptech.glide:glide:$glide_version"
+    //annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
     kapt "com.github.bumptech.glide:compiler:$glide_version"
 
     //https://github.com/Dhaval2404/ImagePicker

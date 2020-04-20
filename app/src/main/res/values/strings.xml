@@ -2,7 +2,7 @@
     <string name="app_name">To Do MVVM</string>
 
     <string name="hint_password">Password</string>
-    <string name="hint_userId">User</string>
+    <string name="hint_userId">Email</string>
     <string name="btn_login">Log In</string>
     <string name="forgot_password">Forgot your login detail?</string>
     <string name="get_help_signing">Get help signing in</string>
