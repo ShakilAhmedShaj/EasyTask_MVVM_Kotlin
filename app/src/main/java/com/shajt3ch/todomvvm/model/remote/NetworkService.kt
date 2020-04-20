@@ -7,14 +7,12 @@ import com.shajt3ch.todomvvm.model.remote.request.todo.EditTaskRequest
 import com.shajt3ch.todomvvm.model.remote.response.auth.LoginResponse
 import com.shajt3ch.todomvvm.model.remote.response.auth.RegisterResponse
 import com.shajt3ch.todomvvm.model.remote.response.auth.ValidateResponse
+import com.shajt3ch.todomvvm.model.remote.response.profile.UserProfileResponse
 import com.shajt3ch.todomvvm.model.remote.response.todo.AddTaskResponse
 import com.shajt3ch.todomvvm.model.remote.response.todo.EditTaskResponse
 import com.shajt3ch.todomvvm.model.remote.response.todo.TaskResponse
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
+import retrofit2.http.*
 
 /**
  * Created by Shakil Ahmed Shaj on 14,April,2020.
@@ -46,5 +44,11 @@ interface NetworkService {
         @Header("Authorization") token: String,
         @Body editTaskRequest: EditTaskRequest
     ): Response<EditTaskResponse>
+
+    @GET("${EndPoints.GET_USER_PROFILE} {id}")
+    suspend fun getUserProfile(
+        @Header("Authorization") token: String,
+        @Path("id") id: String
+    ): Response<UserProfileResponse>
 
 }

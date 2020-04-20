@@ -33,8 +33,32 @@ class ProfileFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
-        // TODO: Use the ViewModel
+        viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
+
+        observer()
+
+    }
+
+    private fun observer(){
+        viewModel.loading.observe(viewLifecycleOwner, Observer {
+            pb_profile.visibility =  if (it) View.VISIBLE else View.GONE
+        })
+
+        viewModel.getUserProfile().observe(viewLifecycleOwner, Observer {
+            profileName.text = it.name
+            profileEmail.text = it.email
+            profileBio.text = it.bio
+
+            Log.e(TAG,"glide on ")
+
+            Glide.with(this)
+                .load(it.profileImage)
+                .circleCrop()
+                .into(profileImage)
+
+            Log.e(TAG,"glide off ")
+
+        })
     }
 
 }
