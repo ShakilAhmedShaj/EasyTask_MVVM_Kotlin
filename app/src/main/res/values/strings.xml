@@ -2,7 +2,7 @@
     <string name="app_name">To Do MVVM</string>
 
     <string name="hint_password">Password</string>
-    <string name="hint_userId">User</string>
+    <string name="hint_userId">Email</string>
     <string name="btn_login">Log In</string>
     <string name="forgot_password">Forgot your login detail?</string>
     <string name="get_help_signing">Get help signing in</string>
@@ -61,6 +61,11 @@
     <string name="email_field_hint">Email</string>
     <string name="name">Name</string>
     <string name="bio">Bio</string>
+
+    <string name="success_sign_up_title">Congratulations !</string>
+    <string name="success_sign_up_msg">Registration Successful. Please Login.</string>
+    <string name="error_sign_up_title">Sorry!</string>
+    <string name="error_sign_up_msg">Registration Failed. Please Try Again!</string>
 
 
     <string-array name="task_status_list">

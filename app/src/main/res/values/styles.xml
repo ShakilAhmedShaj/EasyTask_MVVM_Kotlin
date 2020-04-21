@@ -34,4 +34,6 @@
         <item name="android:inputType">text</item>
     </style>
 
+    <style name="label_edit_profile">Name</style>
+
 </resources>

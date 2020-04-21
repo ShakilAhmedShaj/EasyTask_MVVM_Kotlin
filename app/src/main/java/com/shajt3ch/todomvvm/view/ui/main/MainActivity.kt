@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         toolbar = tool_bar as MaterialToolbar
+        setSupportActionBar(toolbar)
 
         bottomNavigation()
     }
