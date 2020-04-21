@@ -69,6 +69,7 @@ class EditProfileFragment : Fragment() {
         viewModel.imageUrl.observe(viewLifecycleOwner, Observer {
             Glide.with(this)
                 .load(it)
+                .apply(RequestOptions().signature(ObjectKey(System.currentTimeMillis())))
                 .circleCrop()
                 .into(editProfileImage)
         })
@@ -89,7 +90,7 @@ class EditProfileFragment : Fragment() {
                     val fileUri = data?.data
                     Glide.with(this)
                         .load(fileUri)
-                        .apply(RequestOptions().signature(ObjectKey(System.currentTimeMillis())))
+                        //.apply(RequestOptions().signature(ObjectKey(System.currentTimeMillis())))
                         .circleCrop()
                         .into(editProfileImage)
                     //You can get File object from intent
