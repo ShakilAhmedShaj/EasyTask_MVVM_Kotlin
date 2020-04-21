@@ -108,5 +108,8 @@
         <argument
             android:name="image_url"
             app:argType="string" />
+        <action
+            android:id="@+id/action_editProfileFragment_to_navigation_profile"
+            app:destination="@id/navigation_profile" />
     </fragment>
 </navigation>
