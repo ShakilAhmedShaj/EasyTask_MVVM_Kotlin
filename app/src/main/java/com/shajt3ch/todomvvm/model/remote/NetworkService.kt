@@ -7,10 +7,13 @@ import com.shajt3ch.todomvvm.model.remote.request.todo.EditTaskRequest
 import com.shajt3ch.todomvvm.model.remote.response.auth.LoginResponse
 import com.shajt3ch.todomvvm.model.remote.response.auth.RegisterResponse
 import com.shajt3ch.todomvvm.model.remote.response.auth.ValidateResponse
+import com.shajt3ch.todomvvm.model.remote.response.profile.EditProfileResponse
 import com.shajt3ch.todomvvm.model.remote.response.profile.UserProfileResponse
 import com.shajt3ch.todomvvm.model.remote.response.todo.AddTaskResponse
 import com.shajt3ch.todomvvm.model.remote.response.todo.EditTaskResponse
 import com.shajt3ch.todomvvm.model.remote.response.todo.TaskResponse
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -50,5 +53,16 @@ interface NetworkService {
         @Header("Authorization") token: String,
         @Path("id") id: String
     ): Response<UserProfileResponse>
+
+    @Multipart
+    @POST(EndPoints.EDIT_PROFILE)
+    suspend fun editProfile(
+        @Header("Authorization") token: String,
+        @Part("id") id: RequestBody,
+        @Part("name") name: RequestBody,
+        @Part("email") email: RequestBody,
+        @Part profile_image: MultipartBody.Part? = null,
+        @Part("bio") bio: RequestBody
+    ): Response<EditProfileResponse>
 
 }

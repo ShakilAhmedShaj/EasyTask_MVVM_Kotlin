@@ -1,6 +1,7 @@
 package com.shajt3ch.todomvvm.model.repository
 
 import com.shajt3ch.todomvvm.model.remote.NetworkService
+import com.shajt3ch.todomvvm.model.remote.response.profile.EditProfileResponse
 import com.shajt3ch.todomvvm.model.remote.response.profile.UserProfileResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -14,7 +15,7 @@ class UserProfileRepository(private val networkService: NetworkService) {
 
     suspend fun getUserProfile(token: String, id: String): Response<UserProfileResponse> = networkService.getUserProfile(token, id)
 
-   /* suspend fun editProfile(
+    suspend fun editProfile(
         token: String,
         id: RequestBody,
         name: RequestBody,
@@ -28,5 +29,5 @@ class UserProfileRepository(private val networkService: NetworkService) {
         email,
         profile_image,
         bio
-    ) */
+    )
 }
