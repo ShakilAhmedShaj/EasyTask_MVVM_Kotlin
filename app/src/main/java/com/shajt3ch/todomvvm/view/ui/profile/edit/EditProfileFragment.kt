@@ -89,10 +89,9 @@ class EditProfileFragment : Fragment() {
                     val fileUri = data?.data
                     Glide.with(this)
                         .load(fileUri)
+                        .apply(RequestOptions().signature(ObjectKey(System.currentTimeMillis())))
                         .circleCrop()
                         .into(editProfileImage)
-
-
                     //You can get File object from intent
                     val file: File? = ImagePicker.getFile(data)
                     viewModel.imageField.value = file

@@ -9,6 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.signature.ObjectKey
 
 import com.shajt3ch.todomvvm.R
 import com.shajt3ch.todomvvm.viewmodel.profile.ProfileViewModel
@@ -53,6 +55,7 @@ class ProfileFragment : Fragment() {
 
             Glide.with(this)
                 .load(it.profileImage)
+                .apply(RequestOptions().signature(ObjectKey(System.currentTimeMillis())))
                 .circleCrop()
                 .into(profileImage)
 
