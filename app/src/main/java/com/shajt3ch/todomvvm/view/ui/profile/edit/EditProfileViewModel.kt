@@ -3,5 +3,11 @@ package com.shajt3ch.todomvvm.view.ui.profile.edit
 import androidx.lifecycle.ViewModel
 
 class EditProfileViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+
+    companion object {
+        const val TAG = "EditProfileViewModel"
+    }
+
+
+
 }

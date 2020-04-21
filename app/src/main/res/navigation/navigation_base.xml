@@ -95,5 +95,18 @@
         android:id="@+id/editProfileFragment"
         android:name="com.shajt3ch.todomvvm.view.ui.profile.edit.EditProfileFragment"
         android:label="Edit Profile"
-        tools:layout="@layout/edit_profile_fragment" />
+        tools:layout="@layout/edit_profile_fragment" >
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <argument
+            android:name="bio"
+            app:argType="string" />
+        <argument
+            android:name="image_url"
+            app:argType="string" />
+    </fragment>
 </navigation>

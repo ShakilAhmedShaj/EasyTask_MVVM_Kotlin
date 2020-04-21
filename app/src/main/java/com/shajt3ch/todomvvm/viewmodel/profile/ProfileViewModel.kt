@@ -34,8 +34,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
 
     init {
         userProfileRepository = UserProfileRepository(networkService)
-        sharedPreferences =
-            application.getSharedPreferences("com.shajt3ch.todomvvm.pref", Context.MODE_PRIVATE)
+        sharedPreferences = application.getSharedPreferences("com.shajt3ch.todomvvm.pref", Context.MODE_PRIVATE)
         appPreferences = AppPreferences(sharedPreferences)
 
         token = appPreferences.getAccessToken().toString()

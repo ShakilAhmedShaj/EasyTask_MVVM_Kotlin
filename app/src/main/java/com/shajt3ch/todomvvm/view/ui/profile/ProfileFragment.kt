@@ -71,7 +71,15 @@ class ProfileFragment : Fragment() {
         when (item.itemId) {
             R.id.navigation_edit_profile ->
 
-                findNavController().navigate(ProfileFragmentDirections.actionNavigationProfileToEditProfileFragment())
+                findNavController().navigate(
+                    ProfileFragmentDirections.actionNavigationProfileToEditProfileFragment(
+
+                        profileName.text.toString(),
+                        profileEmail.text.toString(),
+                        profileBio.text.toString(),
+                        viewModel.imageUrl.value.toString()
+                    )
+                )
 
         }
 
