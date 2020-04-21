@@ -3,10 +3,8 @@ package com.shajt3ch.todomvvm.view.ui.profile
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -33,15 +31,16 @@ class ProfileFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        setHasOptionsMenu(true)
         viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
 
         observer()
 
     }
 
-    private fun observer(){
+    private fun observer() {
         viewModel.loading.observe(viewLifecycleOwner, Observer {
-            pb_profile.visibility =  if (it) View.VISIBLE else View.GONE
+            pb_profile.visibility = if (it) View.VISIBLE else View.GONE
         })
 
         viewModel.getUserProfile().observe(viewLifecycleOwner, Observer {
@@ -49,16 +48,35 @@ class ProfileFragment : Fragment() {
             profileEmail.text = it.email
             profileBio.text = it.bio
 
-            Log.e(TAG,"glide on ")
+            Log.e(TAG, "glide on ")
 
             Glide.with(this)
                 .load(it.profileImage)
                 .circleCrop()
                 .into(profileImage)
 
-            Log.e(TAG,"glide off ")
+            Log.e(TAG, "glide off ")
 
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+
+        inflater.inflate(R.menu.profile_edit_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.navigation_edit_profile ->
+
+                Log.e(TAG, "Edit Clicked ")
+
+        }
+
+        return false
+        //return super.onOptionsItemSelected(item)
+
     }
 
 }
