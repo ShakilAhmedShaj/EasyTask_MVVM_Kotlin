@@ -2,6 +2,7 @@ package com.shajt3ch.todomvvm.viewmodel.splash
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
@@ -9,6 +10,7 @@ import com.shajt3ch.todomvvm.BuildConfig
 import com.shajt3ch.todomvvm.model.local.AppPreferences
 import com.shajt3ch.todomvvm.model.remote.Networking
 import com.shajt3ch.todomvvm.model.repository.ValidateTokenRepository
+import retrofit2.HttpException
 
 /**
  * Created by Shakil Ahmed Shaj on 15,April,2020.
@@ -40,8 +42,21 @@ class SplashViewModel : ViewModel() {
 
 
     fun validateToken() = liveData {
-        val data = validateTokenRepository.validateToken(token.value.toString())
-        emit(data)
+
+
+        try {
+            val data = validateTokenRepository.validateToken(token.value.toString())
+            emit(data)
+
+        } catch (httpException: HttpException) {
+            Log.e(TAG, httpException.toString())
+
+
+        } catch (exception: Exception) {
+            Log.e(TAG, exception.toString())
+
+        }
+
     }
 
 }

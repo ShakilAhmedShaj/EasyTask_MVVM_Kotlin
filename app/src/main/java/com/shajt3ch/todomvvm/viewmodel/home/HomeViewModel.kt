@@ -2,6 +2,7 @@ package com.shajt3ch.todomvvm.viewmodel.home
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
@@ -9,8 +10,8 @@ import com.shajt3ch.todomvvm.BuildConfig
 import com.shajt3ch.todomvvm.model.local.AppPreferences
 import com.shajt3ch.todomvvm.model.remote.Networking
 import com.shajt3ch.todomvvm.model.remote.response.todo.TaskResponse
-import com.shajt3ch.todomvvm.model.repository.AddTaskRepository
 import com.shajt3ch.todomvvm.model.repository.TaskRepository
+import retrofit2.HttpException
 
 class HomeViewModel : ViewModel() {
 
@@ -46,16 +47,29 @@ class HomeViewModel : ViewModel() {
 
     fun getAllTask() = liveData {
 
-        progress.postValue(true)
 
-        val data = taskRepository.getAllTask(token)
+        try {
+            progress.postValue(true)
 
-        if (data.code() == 200) {
-            taskList.postValue(data.body())
+            val data = taskRepository.getAllTask(token)
+
+            if (data.code() == 200) {
+                taskList.postValue(data.body())
+            }
+
+            emit(data)
+            progress.postValue(false)
+
+        } catch (httpException: HttpException) {
+            Log.e(TAG, httpException.toString())
+
+
+        } catch (exception: Exception) {
+            Log.e(TAG, exception.toString())
+
         }
 
-        emit(data)
-        progress.postValue(false)
+
 
     }
 

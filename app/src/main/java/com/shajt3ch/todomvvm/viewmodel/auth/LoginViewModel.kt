@@ -2,6 +2,7 @@ package com.shajt3ch.todomvvm.viewmodel.auth
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.shajt3ch.todomvvm.BuildConfig
@@ -11,6 +12,8 @@ import com.shajt3ch.todomvvm.model.remote.request.auth.LoginRequest
 import com.shajt3ch.todomvvm.model.remote.response.auth.LoginResponse
 import com.shajt3ch.todomvvm.model.repository.LoginRepository
 import kotlinx.coroutines.Dispatchers.IO
+import retrofit2.HttpException
+import kotlin.Exception
 
 /**
  * Created by Shakil Ahmed Shaj on 14,April,2020.
@@ -38,6 +41,18 @@ class LoginViewModel : ViewModel() {
 
 
     fun login(loginRequest: LoginRequest) = liveData(IO) {
+
+        try {
+
+        } catch (httpException: HttpException) {
+            Log.e(TAG, httpException.toString())
+
+
+        } catch (exception: Exception) {
+            Log.e(TAG, exception.toString())
+
+        }
+
 
         val data = loginRepository.login(loginRequest)
         emit(data)

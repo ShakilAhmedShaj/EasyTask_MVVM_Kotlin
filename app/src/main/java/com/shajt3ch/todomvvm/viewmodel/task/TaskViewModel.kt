@@ -2,6 +2,7 @@ package com.shajt3ch.todomvvm.viewmodel.task
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
@@ -10,6 +11,7 @@ import com.shajt3ch.todomvvm.model.local.AppPreferences
 import com.shajt3ch.todomvvm.model.remote.Networking
 import com.shajt3ch.todomvvm.model.remote.request.todo.AddTaskRequest
 import com.shajt3ch.todomvvm.model.repository.AddTaskRepository
+import retrofit2.HttpException
 
 class TaskViewModel : ViewModel() {
 
@@ -38,12 +40,25 @@ class TaskViewModel : ViewModel() {
     }
 
     fun addTask(addTaskRequest: AddTaskRequest) = liveData {
-        progress.value = true
 
-        val data = addTaskRepository.addTask(token, addTaskRequest)
-        emit(data)
 
-        progress.value = false
+        try {
+            progress.value = true
+
+            val data = addTaskRepository.addTask(token, addTaskRequest)
+            emit(data)
+
+            progress.value = false
+
+        } catch (httpException: HttpException) {
+            Log.e(TAG, httpException.toString())
+
+
+        } catch (exception: Exception) {
+            Log.e(TAG, exception.toString())
+
+        }
+
     }
 
 

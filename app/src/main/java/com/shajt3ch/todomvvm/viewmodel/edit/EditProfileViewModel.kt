@@ -3,6 +3,7 @@ package com.shajt3ch.todomvvm.viewmodel.edit
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
@@ -14,6 +15,7 @@ import com.shajt3ch.todomvvm.model.repository.UserProfileRepository
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.HttpException
 import java.io.File
 
 class EditProfileViewModel(application: Application) : AndroidViewModel(application) {
@@ -51,6 +53,42 @@ class EditProfileViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     fun editProfile() = liveData {
+
+
+        try {
+            loading.postValue(true)
+            var profileImage: MultipartBody.Part? = null
+
+            val id = RequestBody.create(MediaType.parse("multipart/form-data"), userId)
+            val name = RequestBody.create(MediaType.parse("multipart/form-data"), nameField.value!!)
+            val email =
+                RequestBody.create(MediaType.parse("multipart/form-data"), emailField.value!!)
+            if (imageField.value != null) {
+                val file: RequestBody =
+                    RequestBody.create(MediaType.parse("multipart/form-data"), imageField.value!!)
+                profileImage =
+                    MultipartBody.Part.createFormData("profile_image", imageField.value?.name, file)
+            }
+            val bio = RequestBody.create(MediaType.parse("multipart/form-data"), biolField.value!!)
+
+            val data = userProfileRepository.editProfile(token, id, name, email, profileImage, bio)
+
+            if (data.code() == 200) {
+                profile.postValue(data.body())
+            }
+
+            emit(profile.value)
+
+            loading.postValue(false)
+
+        } catch (httpException: HttpException) {
+            Log.e(TAG, httpException.toString())
+
+
+        } catch (exception: Exception) {
+            Log.e(TAG, exception.toString())
+
+        }
 
         loading.postValue(true)
 

@@ -43,16 +43,29 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
 
     fun getUserProfile() = liveData {
 
-        loading.postValue(true)
-        val data = userProfileRepository.getUserProfile(token, userId)
-        if (data.code() == 200) {
-            profile = data.body()!!
 
-            imageUrl.postValue(profile.profileImage)
+        try {
+            loading.postValue(true)
+            val data = userProfileRepository.getUserProfile(token, userId)
+            if (data.code() == 200) {
+                profile = data.body()!!
+
+                imageUrl.postValue(profile.profileImage)
+            }
+
+            emit(profile)
+            loading.postValue(false)
+
+        } catch (httpException: HttpException) {
+            Log.e(TAG, httpException.toString())
+
+
+        } catch (exception: Exception) {
+            Log.e(TAG, exception.toString())
+
         }
 
-        emit(profile)
-        loading.postValue(false)
+
 
 
     }
