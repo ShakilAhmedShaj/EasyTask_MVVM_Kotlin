@@ -42,25 +42,24 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         loginRepository = LoginRepository(networkService, appPreferences)
     }
 
-    fun login(loginRequest: LoginRequest) = liveData {
+    fun login(loginRequest: LoginRequest) = liveData(IO) {
 
         try {
             val data = loginRepository.login(loginRequest)
             if (data.code() == 200) {
-                loginResponse.value = data.body()
+                loginResponse.postValue(data.body())
+                isSuccess.postValue(true)
                 emit(loginResponse.value)
-                isSuccess.value = true
             } else {
-                isSuccess.value = false
+                isSuccess.postValue(false)
             }
         } catch (httpException: HttpException) {
             Log.e(TAG, httpException.toString())
-            isError.value = httpException.toString()
-
+            isError.postValue(httpException.toString())
 
         } catch (exception: Exception) {
             Log.e(TAG, exception.toString())
-            isError.value = exception.toString()
+            isError.postValue(exception.toString())
         }
 
     }
