@@ -36,7 +36,6 @@ class SplashActivity : AppCompatActivity() {
         GeneralHelper.hideStatusBar(this)
 
         viewModel = ViewModelProvider(this).get(SplashViewModel::class.java)
-        viewModel.init(this)
 
 
         //splash delay
@@ -76,8 +75,6 @@ class SplashActivity : AppCompatActivity() {
                         })
                     }
                 })
-
-
             }
         } else {
 

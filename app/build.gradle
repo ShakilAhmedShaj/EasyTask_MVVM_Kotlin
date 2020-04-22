@@ -103,4 +103,7 @@ dependencies {
     //https://airbnb.io/lottie/#/android
     implementation "com.airbnb.android:lottie:$lottieVersion"
 
+    //https://github.com/GrenderG/Toasty
+    implementation "com.github.GrenderG:Toasty:$tostyVersion"
+
 }

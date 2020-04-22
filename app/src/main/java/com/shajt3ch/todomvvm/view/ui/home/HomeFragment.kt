@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -19,6 +20,7 @@ import com.shajt3ch.todomvvm.model.remote.response.todo.TaskResponse
 import com.shajt3ch.todomvvm.view.adaptor.TaskAdapter
 import com.shajt3ch.todomvvm.view.adaptor.TaskCallBack
 import com.shajt3ch.todomvvm.viewmodel.home.HomeViewModel
+import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.home_fragment.*
 
 class HomeFragment : Fragment(), TaskCallBack {
@@ -64,7 +66,6 @@ class HomeFragment : Fragment(), TaskCallBack {
         viewModel.progress.observe(viewLifecycleOwner, Observer {
             pb_home.visibility = if (it) View.VISIBLE else View.GONE
         })
-
         getAllTask()
     }
 
