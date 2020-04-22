@@ -8,12 +8,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.shajt3ch.todomvvm.R
 import com.shajt3ch.todomvvm.model.remote.request.auth.RegisterRequest
-import com.shajt3ch.todomvvm.viewmodel.auth.RegisterViewModel
+import com.shajt3ch.todomvvm.viewmodel.auth.SignUpViewModel
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.sdk27.coroutines.onClick
-import kotlin.math.log
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -21,21 +20,18 @@ class SignUpActivity : AppCompatActivity() {
         const val TAG = "SignUpActivity"
     }
 
-    private lateinit var viewModel: RegisterViewModel
+    private lateinit var viewModel: SignUpViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
-        viewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(SignUpViewModel::class.java)
 
         btn_sign_up.onClick { prepareSignUp() }
-
-        viewModel.progress.observe(this, Observer {
-            pb_reg.visibility = if (it) View.VISIBLE else View.GONE
-        })
-
         tv_login.onClick { launchLoginActivity() }
+
+        observer()
     }
 
     private fun launchLoginActivity() {
@@ -113,7 +109,6 @@ class SignUpActivity : AppCompatActivity() {
 
                 signUp(signUpData)
 
-
             }
         }
 
@@ -121,43 +116,63 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun signUp(signUpData: RegisterRequest) {
 
-        viewModel.register(signUpData).observe(this, Observer { data ->
+        viewModel.register(signUpData)
+    }
 
-            if (data.code() == 201) {
+    private fun observer() {
+        viewModel.isError.observe(this, Observer {
+            errorDialog(it)
+        })
 
-                val data = data.body()
-
-
-                alert {
-                    isCancelable = false
-                    title = getString(R.string.success_sign_up_title)
-                    message = getString(R.string.success_sign_up_msg)
-                    positiveButton("OK") {
-                        it.dismiss()
-
-                        startActivity(intentFor<LoginActivity>())
-                    }
-                }.show()
-
-
-
-                Log.d(TAG, "Name : ${data?.user_name}  message : ${data?.email}")
-
-            } else {
-
-                alert {
-                    isCancelable = false
-                    title = getString(R.string.error_sign_up_title)
-                    message = getString(R.string.error_sign_up_msg)
-                    positiveButton("OK") {
-                        it.dismiss()
-                    }
-                }.show()
-
-                Log.e(TAG, "error code : ${data.code()}  message : ${data.errorBody()}")
-
+        viewModel.isSuccess.observe(this, Observer {
+            it?.run {
+                if (it) {
+                    successDialog()
+                } else {
+                    unSuccessFulDialog()
+                }
             }
+        })
+
+        viewModel.loading.observe(this, Observer {
+            pb_sign_up.visibility = if (it) View.VISIBLE else View.GONE
 
         })
+    }
+
+
+    private fun successDialog() {
+        alert {
+            title = getString(R.string.title_successful_signup)
+            message = getString(R.string.msg_signup_successful)
+            isCancelable = false
+            positiveButton(getString(R.string.btn_ok)) { dialog ->
+                finish()
+                dialog.dismiss()
+            }
+        }.show()
+    }
+
+    private fun unSuccessFulDialog() {
+        alert {
+            title = getString(R.string.title_un_successful_dialog)
+            message = getString(R.string.msg_add_post_un_successful)
+            isCancelable = false
+            positiveButton(getString(R.string.btn_ok)) { dialog ->
+                dialog.dismiss()
+            }
+        }.show()
+    }
+
+    private fun errorDialog(errorMsg: String) {
+        alert {
+            title = getString(R.string.title_error_dialog)
+            message = errorMsg
+            isCancelable = false
+            positiveButton(getString(R.string.btn_ok)) { dialog ->
+                dialog.dismiss()
+            }
+        }.show()
+
     }
 }
