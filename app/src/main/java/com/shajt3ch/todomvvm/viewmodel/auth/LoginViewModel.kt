@@ -14,6 +14,7 @@ import com.shajt3ch.todomvvm.model.remote.Networking
 import com.shajt3ch.todomvvm.model.remote.request.auth.LoginRequest
 import com.shajt3ch.todomvvm.model.remote.response.auth.LoginResponse
 import com.shajt3ch.todomvvm.model.repository.LoginRepository
+import com.shajt3ch.todomvvm.util.network.NetworkHelper
 import kotlinx.coroutines.Dispatchers.IO
 import retrofit2.HttpException
 import kotlin.Exception
@@ -35,6 +36,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     val loginResponse: MutableLiveData<LoginResponse> = MutableLiveData()
     val isSuccess: MutableLiveData<Boolean> = MutableLiveData()
     val isError: MutableLiveData<String> = MutableLiveData()
+    val errorMsg: MutableLiveData<String> = MutableLiveData()
 
     init {
         appPreferences = AppPreferences(sharedPreferences)
@@ -50,6 +52,8 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
                 isSuccess.postValue(true)
                 emit(loginResponse.value)
             } else {
+                val error = NetworkHelper.handelNetworkError(data)
+                errorMsg.postValue(error.message)
                 isSuccess.postValue(false)
             }
         } catch (httpException: HttpException) {

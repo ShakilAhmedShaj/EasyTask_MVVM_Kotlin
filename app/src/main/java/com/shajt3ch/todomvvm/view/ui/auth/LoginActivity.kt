@@ -116,7 +116,7 @@ class LoginActivity : AppCompatActivity() {
     private fun unSuccessFulDialog() {
         alert {
             title = getString(R.string.title_un_successful_dialog)
-            message = getString(R.string.msg_add_post_un_successful)
+            message = viewModel.errorMsg.value.toString()
             isCancelable = false
             positiveButton(getString(R.string.btn_ok)) { dialog ->
                 dialog.dismiss()

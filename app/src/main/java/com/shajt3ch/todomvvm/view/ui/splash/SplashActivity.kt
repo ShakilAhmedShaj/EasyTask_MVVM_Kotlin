@@ -1,17 +1,14 @@
 package com.shajt3ch.todomvvm.view.ui.splash
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.shajt3ch.todomvvm.R
-import com.shajt3ch.todomvvm.model.local.AppPreferences
 import com.shajt3ch.todomvvm.util.GeneralHelper
-import com.shajt3ch.todomvvm.util.NetworkHelper
+import com.shajt3ch.todomvvm.util.network.NetworkHelper
 import com.shajt3ch.todomvvm.view.ui.auth.LoginActivity
 import com.shajt3ch.todomvvm.view.ui.main.MainActivity
 import com.shajt3ch.todomvvm.viewmodel.splash.SplashViewModel
