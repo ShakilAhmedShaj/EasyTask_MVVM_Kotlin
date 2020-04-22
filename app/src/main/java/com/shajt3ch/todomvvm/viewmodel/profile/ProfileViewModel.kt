@@ -2,7 +2,6 @@ package com.shajt3ch.todomvvm.viewmodel.profile
 
 import android.app.Application
 import android.content.Context
-import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
@@ -21,20 +20,17 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
     }
 
     private val networkService = Networking.create(BuildConfig.BASE_URL)
-    private lateinit var userProfileRepository: UserProfileRepository
-
-    private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var appPreferences: AppPreferences
-
-    private lateinit var token: String
-    private lateinit var userId: String
+    private  var userProfileRepository: UserProfileRepository
+    private var  sharedPreferences = application.getSharedPreferences(BuildConfig.PREF_NAME, Context.MODE_PRIVATE)
+    private  var appPreferences: AppPreferences
+    private  var token: String
+    private  var userId: String
     val loading: MutableLiveData<Boolean> = MutableLiveData()
     lateinit var profile: UserProfileResponse
     val imageUrl: MutableLiveData<String> = MutableLiveData()
 
     init {
         userProfileRepository = UserProfileRepository(networkService)
-        sharedPreferences = application.getSharedPreferences("com.shajt3ch.todomvvm.pref", Context.MODE_PRIVATE)
         appPreferences = AppPreferences(sharedPreferences)
 
         token = appPreferences.getAccessToken().toString()
@@ -43,16 +39,29 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
 
     fun getUserProfile() = liveData {
 
-        loading.postValue(true)
-        val data = userProfileRepository.getUserProfile(token, userId)
-        if (data.code() == 200) {
-            profile = data.body()!!
 
-            imageUrl.postValue(profile.profileImage)
+        try {
+            loading.postValue(true)
+            val data = userProfileRepository.getUserProfile(token, userId)
+            if (data.code() == 200) {
+                profile = data.body()!!
+
+                imageUrl.postValue(profile.profileImage)
+            }
+
+            emit(profile)
+            loading.postValue(false)
+
+        } catch (httpException: HttpException) {
+            Log.e(TAG, httpException.toString())
+
+
+        } catch (exception: Exception) {
+            Log.e(TAG, exception.toString())
+
         }
 
-        emit(profile)
-        loading.postValue(false)
+
 
 
     }

@@ -10,8 +10,9 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.signature.ObjectKey
 import com.github.dhaval2404.imagepicker.ImagePicker
-
 import com.shajt3ch.todomvvm.R
 import com.shajt3ch.todomvvm.viewmodel.edit.EditProfileViewModel
 import kotlinx.android.synthetic.main.edit_profile_fragment.*

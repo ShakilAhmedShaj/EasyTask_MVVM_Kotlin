@@ -20,7 +20,6 @@ class ProfileFragment : Fragment() {
 
     companion object {
         const val TAG = "ProfileFragment"
-        fun newInstance() = ProfileFragment()
     }
 
     private lateinit var viewModel: ProfileViewModel
@@ -87,7 +86,6 @@ class ProfileFragment : Fragment() {
         }
 
         return false
-        //return super.onOptionsItemSelected(item)
 
     }
 

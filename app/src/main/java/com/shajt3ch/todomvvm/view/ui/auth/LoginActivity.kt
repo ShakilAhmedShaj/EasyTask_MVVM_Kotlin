@@ -28,11 +28,11 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
-        viewModel.init(this)
 
         btn_login.onClick { prepareLogin() }
-
         tv_signup.onClick { launchSignUpActivity() }
+
+        observer()
     }
 
     private fun launchSignUpActivity() {
@@ -76,25 +76,16 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-
     }
 
     private fun login(login_request: LoginRequest) {
 
         viewModel.login(login_request).observe(this, Observer {
-            if (it.code() == 200) {
 
-                val data = it.body()
-
-                data?.let { saveUserDetail(data) }
-
-                Log.d(TAG, "Login Success!")
-                Log.d(TAG, "Name : ${data?.name}  Email : ${data?.email}")
-
-
-            } else {
-                Log.e(TAG, "error code : ${it.code()}  message : ${it.errorBody()}")
+            it?.let {
+                saveUserDetail(it)
             }
+
         })
     }
 
@@ -107,5 +98,41 @@ class LoginActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    private fun observer() {
+        viewModel.isError.observe(this, Observer {
+            errorDialog(it)
+        })
+
+        viewModel.isSuccess.observe(this, Observer {
+            if (!it) {
+                unSuccessFulDialog()
+            }
+        })
+    }
+
+
+    private fun unSuccessFulDialog() {
+        alert {
+            title = getString(R.string.title_un_successful_dialog)
+            message = viewModel.errorMsg.value.toString()
+            isCancelable = false
+            positiveButton(getString(R.string.btn_ok)) { dialog ->
+                dialog.dismiss()
+            }
+        }.show()
+    }
+
+    private fun errorDialog(errorMsg: String) {
+        alert {
+            title = getString(R.string.title_error_dialog)
+            message = errorMsg
+            isCancelable = false
+            positiveButton(getString(R.string.btn_ok)) { dialog ->
+                dialog.dismiss()
+            }
+        }.show()
+
     }
 }

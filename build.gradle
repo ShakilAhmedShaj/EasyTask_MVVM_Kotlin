@@ -45,4 +45,5 @@ ext {
     imagepicker = "1.6"
     inline_activity_result_kotlin = "1.0.1"
     lottieVersion = "3.4.0"
+    tostyVersion = "1.4.2"
 }
