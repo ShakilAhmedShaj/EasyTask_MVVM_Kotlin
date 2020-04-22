@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.shajt3ch.todomvvm.BuildConfig
 import com.shajt3ch.todomvvm.model.local.AppPreferences
 import retrofit2.HttpException
 
@@ -14,7 +15,7 @@ class TaskDetailViewModel(application: Application) : AndroidViewModel(applicati
         const val TAG = "TaskDetailViewModel"
     }
 
-    private var sharedPreferences: SharedPreferences = application.getSharedPreferences("com.shajt3ch.todomvvm.pref", Context.MODE_PRIVATE)
+    private var  sharedPreferences = application.getSharedPreferences(BuildConfig.PREF_NAME, Context.MODE_PRIVATE)
     private  var appPreferences: AppPreferences
     private  var userId: String
 

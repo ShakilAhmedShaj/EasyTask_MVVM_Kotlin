@@ -26,16 +26,13 @@ class EditProfileViewModel(application: Application) : AndroidViewModel(applicat
 
     private val networkService = Networking.create(BuildConfig.BASE_URL)
     private var userProfileRepository: UserProfileRepository
-
-    private var sharedPreferences: SharedPreferences
+    private var  sharedPreferences = application.getSharedPreferences(BuildConfig.PREF_NAME, Context.MODE_PRIVATE)
     private var appPreferences: AppPreferences
 
     private var token: String
     private var userId: String
     val loading: MutableLiveData<Boolean> = MutableLiveData()
-    lateinit var editProfile: EditProfileResponse
     val imageUrl: MutableLiveData<String> = MutableLiveData()
-
     val nameField: MutableLiveData<String> = MutableLiveData()
     val emailField: MutableLiveData<String> = MutableLiveData()
     val imageField: MutableLiveData<File> = MutableLiveData()
@@ -44,8 +41,6 @@ class EditProfileViewModel(application: Application) : AndroidViewModel(applicat
 
     init {
         userProfileRepository = UserProfileRepository(networkService)
-        sharedPreferences =
-            application.getSharedPreferences("com.shajt3ch.todomvvm.pref", Context.MODE_PRIVATE)
         appPreferences = AppPreferences(sharedPreferences)
 
         token = appPreferences.getAccessToken().toString()

@@ -26,7 +26,7 @@ class SplashViewModel(application: Application) : AndroidViewModel(application) 
 
     private val networkService = Networking.create(BuildConfig.BASE_URL)
     private val validateTokenRepository = ValidateTokenRepository(networkService)
-    private var sharedPreferences: SharedPreferences = application.getSharedPreferences("com.shajt3ch.todomvvm.pref", Context.MODE_PRIVATE)
+    private var  sharedPreferences = application.getSharedPreferences(BuildConfig.PREF_NAME, Context.MODE_PRIVATE)
     private var appPreferences: AppPreferences
     var token = MutableLiveData<String>()
 

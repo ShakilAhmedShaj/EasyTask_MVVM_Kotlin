@@ -27,11 +27,13 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField("String", "BASE_URL", "\"http://mrmed.com.bd/\"")
+            buildConfigField("String", "PREF_NAME", "\"com.shajt3ch.todomvvm.pref\"")
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField("String", "BASE_URL", "\"http://mrmed.com.bd/\"")
+            buildConfigField("String", "PREF_NAME", "\"com.shajt3ch.todomvvm.pref\"")
         }
     }
 
