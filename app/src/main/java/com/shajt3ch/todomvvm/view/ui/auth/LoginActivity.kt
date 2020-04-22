@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.shajt3ch.todomvvm.R
 import com.shajt3ch.todomvvm.model.remote.request.auth.LoginRequest
 import com.shajt3ch.todomvvm.model.remote.response.auth.LoginResponse
+import com.shajt3ch.todomvvm.util.Validator
 import com.shajt3ch.todomvvm.view.ui.main.MainActivity
 import com.shajt3ch.todomvvm.viewmodel.auth.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
@@ -44,39 +45,35 @@ class LoginActivity : AppCompatActivity() {
         val email = txt_userId.text.toString()
         val password = txt_password.text.toString()
 
-        //check for the empty value
-        when {
-            email.isEmpty() -> {
+        if (!Validator.validateEmail(email)) {
 
-                alert {
-                    isCancelable = false
-                    title = getString(R.string.empty_email_title)
-                    message = getString(R.string.empty_email_msg)
-                    positiveButton("OK") {
-                        it.dismiss()
-                    }
-                }.show()
 
-            }
-            password.isEmpty() -> {
+            alert {
+                isCancelable = false
+                title = getString(R.string.email_validator_title)
+                message = getString(R.string.validation_email_failed)
+                positiveButton("OK") {
+                    it.dismiss()
+                }
+            }.show()
+        } else if (!Validator.validatePassword(password)) {
+            alert {
+                isCancelable = false
+                title = getString(R.string.password_validator_title)
+                message = getString(R.string.validation_password_failed)
+                positiveButton("OK") {
+                    it.dismiss()
+                }
+            }.show()
+        } else {
+            val loginRequest = LoginRequest(email, password)
 
-                alert {
-                    isCancelable = false
-                    title = getString(R.string.empty_password_title)
-                    message = getString(R.string.empty_password_msg)
-                    positiveButton("OK") {
-                        it.dismiss()
-                    }
-                }.show()
-            }
-            else -> {
-                val loginRequest = LoginRequest(email, password)
-
-                login(loginRequest)
-            }
+            login(loginRequest)
         }
 
+
     }
+
 
     private fun login(login_request: LoginRequest) {
 

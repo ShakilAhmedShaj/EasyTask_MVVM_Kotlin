@@ -21,15 +21,24 @@
 
     <string name="empty_user_name_title">Empty UserName!</string>
     <string name="empty_user_name_msg">UserName cannot be empty</string>
-    <string name="empty_email_title">Empty Email!</string>
-    <string name="empty_email_msg">Email cannot be empty</string>
-    <string name="empty_password_title">Empty Password!</string>
-    <string name="empty_password_msg">Password cannot be empty</string>
-    <string name="empty_confirm_password_title">Empty Confirm Password!</string>
-    <string name="empty_confirm_password_msg">Confirm password cannot be empty</string>
+
+<!--    <string name="empty_email_title">Empty Email!</string>-->
+<!--    <string name="empty_email_msg">Email cannot be empty</string>-->
+<!--    <string name="empty_password_title">Empty Password!</string>-->
+<!--    <string name="empty_password_msg">Password cannot be empty</string>-->
+<!--    <string name="empty_confirm_password_title">Empty Confirm Password!</string>-->
+<!--    <string name="empty_confirm_password_msg">Confirm password cannot be empty</string>-->
 
     <string name="error_confirm_password_title">Password Not Matched!</string>
     <string name="error_confirm_password_msg">Confirm password does not match.</string>
+    <string name="email_validator_title">Wrong Email</string>
+    <string name="validation_email_failed">Please check your email address</string>
+    <string name="password_validator_title">Weak Password!</string>
+    <string name="validation_password_failed">Password must be at least 4 characters!</string>
+    <string name="validation_confirm_password_title">Mismatch!</string>
+    <string name="validation_confirm_password_failed">Password didn\'t match!</string>
+
+
     <string name="navigation_home">Home</string>
     <string name="navigation_add_task">Add Task</string>
     <string name="navigation_profile">Profile</string>
@@ -73,4 +82,12 @@
         <item>STARTED</item>
         <item>COMPLETED</item>
     </string-array>
+
+
+
+    <string name="error_code_400">The server could not understand the request due to invalid syntax.</string>
+    <string name="error_code_401">Unauthorized! Please login.</string>
+    <string name="error_code_404">The server can not find the requested resource.</string>
+    <string name="error_code_500">The server has encountered a situation it doesn\'t know how to handle.</string>
+
 </resources>

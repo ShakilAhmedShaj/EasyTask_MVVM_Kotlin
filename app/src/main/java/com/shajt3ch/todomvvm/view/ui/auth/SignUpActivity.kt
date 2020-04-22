@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.shajt3ch.todomvvm.R
 import com.shajt3ch.todomvvm.model.remote.request.auth.RegisterRequest
+import com.shajt3ch.todomvvm.util.Validator
 import com.shajt3ch.todomvvm.viewmodel.auth.SignUpViewModel
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import org.jetbrains.anko.alert
@@ -44,72 +45,55 @@ class SignUpActivity : AppCompatActivity() {
         val password = txt_password.text.toString()
         val confirmPassword = txt_confirm_password.text.toString()
 
-        //check for the empty value
-        when {
-            name.isEmpty() -> {
+        if (name.isEmpty()) {
+            alert {
+                isCancelable = false
+                title = getString(R.string.empty_user_name_title)
+                message = getString(R.string.empty_user_name_msg)
+                positiveButton("OK") {
+                    it.dismiss()
+                }
+            }.show()
+        } else if (!Validator.validateEmail(email)) {
+            alert {
+                isCancelable = false
+                title = getString(R.string.email_validator_title)
+                message = getString(R.string.validation_email_failed)
+                positiveButton("OK") {
+                    it.dismiss()
+                }
+            }.show()
+        } else if (!Validator.validatePassword(password)) {
+            alert {
+                isCancelable = false
+                title = getString(R.string.password_validator_title)
+                message = getString(R.string.validation_password_failed)
+                positiveButton("OK") {
+                    it.dismiss()
+                }
+            }.show()
+        } else if (!Validator.validatePassword(confirmPassword)) {
+            alert {
+                isCancelable = false
+                title = getString(R.string.validation_confirm_password_title)
+                message = getString(R.string.validation_confirm_password_failed)
+                positiveButton("OK") {
+                    it.dismiss()
+                }
+            }.show()
+        } else if (password != confirmPassword) {
+            alert {
+                isCancelable = false
+                title = getString(R.string.error_confirm_password_title)
+                message = getString(R.string.error_confirm_password_msg)
+                positiveButton("OK") {
+                    it.dismiss()
+                }
+            }.show()
+        } else {
+            val signUpData = RegisterRequest(name, email, password, confirmPassword)
 
-                alert {
-                    isCancelable = false
-                    title = getString(R.string.empty_user_name_title)
-                    message = getString(R.string.empty_user_name_msg)
-                    positiveButton("OK") {
-                        it.dismiss()
-                    }
-                }.show()
-
-            }
-            email.isEmpty() -> {
-
-                alert {
-                    isCancelable = false
-                    title = getString(R.string.empty_email_title)
-                    message = getString(R.string.empty_email_msg)
-                    positiveButton("OK") {
-                        it.dismiss()
-                    }
-                }.show()
-
-            }
-            password.isEmpty() -> {
-
-                alert {
-                    isCancelable = false
-                    title = getString(R.string.empty_password_title)
-                    message = getString(R.string.empty_password_msg)
-                    positiveButton("OK") {
-                        it.dismiss()
-                    }
-                }.show()
-            }
-            confirmPassword.isEmpty() -> {
-
-                alert {
-                    isCancelable = false
-                    title = getString(R.string.empty_confirm_password_title)
-                    message = getString(R.string.empty_confirm_password_msg)
-                    positiveButton("OK") {
-                        it.dismiss()
-                    }
-                }.show()
-            }
-            password != confirmPassword -> {
-
-                alert {
-                    isCancelable = false
-                    title = getString(R.string.error_confirm_password_title)
-                    message = getString(R.string.error_confirm_password_msg)
-                    positiveButton("OK") {
-                        it.dismiss()
-                    }
-                }.show()
-            }
-            else -> {
-
-                val signUpData = RegisterRequest(name, email, password, confirmPassword)
-
-                signUp(signUpData)
-
-            }
+            signUp(signUpData)
         }
 
     }
