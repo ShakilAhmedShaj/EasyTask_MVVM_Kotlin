@@ -7,13 +7,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.shajt3ch.todomvvm.R
 import com.shajt3ch.todomvvm.databinding.CustomTaskListViewBinding
+import com.shajt3ch.todomvvm.model.local.entity.TaskEntity
 import com.shajt3ch.todomvvm.model.remote.response.todo.TaskResponse
 
 /**
  * Created by Shakil Ahmed Shaj on 16,April,2020.
  * shakilahmedshaj@gmail.com
  */
-class TaskAdapter(private val taskList: ArrayList<TaskResponse>) :
+class TaskAdapter(private val taskList: ArrayList<TaskEntity>) :
     RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
 
 
@@ -35,7 +36,7 @@ class TaskAdapter(private val taskList: ArrayList<TaskResponse>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val data: TaskResponse = taskList[position]
+        val data: TaskEntity = taskList[position]
 
         when (data.status) {
             "PENDING" -> {

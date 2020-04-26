@@ -21,6 +21,12 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas")
+            }
+        }
     }
     buildTypes {
         debug {
@@ -95,8 +101,8 @@ dependencies {
 
     //https://github.com/bumptech/glide
     implementation "com.github.bumptech.glide:glide:$glide_version"
-    //annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
     kapt "com.github.bumptech.glide:compiler:$glide_version"
+    //annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
 
     //https://github.com/Dhaval2404/ImagePicker
     implementation "com.github.dhaval2404:imagepicker:$imagepicker"
@@ -108,4 +114,11 @@ dependencies {
     //https://github.com/GrenderG/Toasty
     implementation "com.github.GrenderG:Toasty:$tostyVersion"
 
+    //https://developer.android.com/jetpack/androidx/releases/room
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    //annotationProcessor "androidx.room:room-compiler:$room_version"
+
+    //Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$room_version"
 }
