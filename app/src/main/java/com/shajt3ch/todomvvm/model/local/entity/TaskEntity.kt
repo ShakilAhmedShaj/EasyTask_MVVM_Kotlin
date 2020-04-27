@@ -4,6 +4,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
 /**
@@ -30,6 +31,12 @@ data class TaskEntity(
 
     @ColumnInfo(name = "userId")
     val userId: Int, // 1
+
+    @ColumnInfo(name = "createdAt")
+    val createdAt: String, // 2020-04-16 15:25:13
+
+    @ColumnInfo(name = "updatedAt")
+    val updatedAt: String, // 2020-04-16 15:25:13
 
     @ColumnInfo(name = "bg_color")
     var bg_color: Int

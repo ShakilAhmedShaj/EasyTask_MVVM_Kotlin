@@ -97,7 +97,8 @@ class HomeFragment : Fragment(), TaskCallBack {
             Log.e(TAG, "Position: $position is a long click")
         } else {
 
-            val data = viewModel.taskList.value?.get(position)
+            //val data = viewModel.taskList.value?.get(position)
+            val data = viewModel.taskListFromDb.value?.get(position)
 
             findNavController().navigate(
                 HomeFragmentDirections.actionNavigationHomeToTaskDetailFragment(

@@ -77,7 +77,9 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                             body = task.body,
                             status = task.status,
                             userId = task.userId,
-                            bg_color = task.bg_color
+                            bg_color = task.bg_color,
+                            createdAt = task.createdAt,
+                            updatedAt = task.updatedAt
                         )
                     )
                     Log.d(TAG, "New Record : $id")
@@ -162,7 +164,9 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                                     body = task.body,
                                     status = task.status,
                                     userId = task.userId,
-                                    bg_color = task.bg_color
+                                    bg_color = task.bg_color,
+                                    createdAt = task.createdAt,
+                                    updatedAt = task.updatedAt
                                 )
                             )
                             Log.d(TAG, "New Record : $id")
