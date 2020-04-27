@@ -32,10 +32,10 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private var appPreferences: AppPreferences
     private var token: String
     val taskList: MutableLiveData<List<TaskResponse>> = MutableLiveData()
-    val taskListFromDb: MutableLiveData<List<TaskEntity>> = MutableLiveData()
+    val taskListFromDb: MutableLiveData<List<TaskEntity>> = MutableLiveData() //later
     val progress: MutableLiveData<Boolean> = MutableLiveData()
     val isError: MutableLiveData<String> = MutableLiveData()
-    val maxRecId: MutableLiveData<String> = MutableLiveData()
+    private val maxRecId: MutableLiveData<String> = MutableLiveData()
     private var context: Context? = null
 
     init {
@@ -44,6 +44,9 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         token = appPreferences.getAccessToken().toString()
         context = application
 
+        /*
+        getting max id
+         */
         getMaxIdFromDb()
     }
 
@@ -53,7 +56,14 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         try {
             progress.postValue(true)
 
+            /*
+            getting tasks from api
+             */
             val data = taskRepository.getAllTask(token)
+
+            /*
+            adding tasks to local db
+             */
 
             if (data.code() == 200) {
                 taskList.value = data.body()
@@ -95,15 +105,24 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
             try {
 
+                /*
+                getting max task value from db
+                 */
                 var maxId = taskRepository.getMaxTaskId()
 
                 if (maxId == null) {
                     maxId = 0
                 }
 
-                // getTaskById(maxId.toString())
+                /*
+                getting task from api
+                 */
 
+                getTaskById(maxId.toString())
 
+                /*
+                setting max value local var
+                */
                 maxRecId.postValue(maxId.toString())
 
 
@@ -114,15 +133,23 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    /*
+     getting task by id from api
+    */
     private fun getTaskById(maxId: String) {
         try {
 
             if (NetworkHelper.isNetworkConnected(context!!)) {
 
-                CoroutineScope(Dispatchers.IO).launch {
+                CoroutineScope(Dispatchers.Main).launch {
+
                     progress.postValue(true)
+
                     val data = taskRepository.getTaskById(token, maxId)
 
+                    /*
+                    saving to local db
+                     */
                     if (data.code() == 200) {
                         taskList.value = data.body()
 
@@ -141,12 +168,18 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                             Log.d(TAG, "New Record : $id")
                         }
 
-                        getTaskFromDb()
+                        /*
+                        get task from db
+                         */
 
+                        getTaskFromDb()
                     }
                     progress.postValue(false)
                 }
             } else {
+                /*
+                 get task from db when no internet
+                 */
                 getTaskFromDb()
             }
 
@@ -155,6 +188,9 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    /*
+    getting task from db
+     */
     private fun getTaskFromDb() {
         try {
             CoroutineScope(Dispatchers.IO).launch {
@@ -163,8 +199,6 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                 taskListFromDb.postValue(data)
 
             }
-
-
         } catch (error: Exception) {
             Log.e(TAG, error.message.toString())
         }

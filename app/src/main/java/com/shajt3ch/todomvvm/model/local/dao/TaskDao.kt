@@ -19,7 +19,7 @@ interface TaskDao {
     @Delete
     suspend fun delete(taskEntity: TaskEntity): Int
 
-    @Query("SELECT * FROM task_entity")
+    @Query("SELECT * FROM task_entity ORDER BY taskId desc")
     suspend fun getAllTaskFromDb(): List<TaskEntity>
 
     @Query("SELECT MAX(taskId) FROM task_entity")

@@ -32,8 +32,7 @@ class HomeFragment : Fragment(), TaskCallBack {
     }
 
     private lateinit var viewModel: HomeViewModel
-    //private var taskList: ArrayList<TaskResponse> = ArrayList()
-    private var taskList: ArrayList<TaskEntity> = ArrayList()
+    private var taskList: ArrayList<TaskEntity> = ArrayList() //ArrayList<TaskResponse>
 
     //data bind
     private lateinit var binding: HomeFragmentBinding

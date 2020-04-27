@@ -14,7 +14,7 @@ import com.shajt3ch.todomvvm.model.remote.response.todo.TaskResponse
  * Created by Shakil Ahmed Shaj on 16,April,2020.
  * shakilahmedshaj@gmail.com
  */
-class TaskAdapter(private val taskList: ArrayList<TaskEntity>) :
+class TaskAdapter(private val taskList: ArrayList<TaskEntity>) : //ArrayList<TaskResponse>)
     RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
 
 
@@ -36,7 +36,7 @@ class TaskAdapter(private val taskList: ArrayList<TaskEntity>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val data: TaskEntity = taskList[position]
+        val data: TaskEntity = taskList[position] //data: TaskResponse
 
         when (data.status) {
             "PENDING" -> {
