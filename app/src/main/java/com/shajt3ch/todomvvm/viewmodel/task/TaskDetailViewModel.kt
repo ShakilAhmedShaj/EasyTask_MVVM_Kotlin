@@ -20,6 +20,7 @@ class TaskDetailViewModel(application: Application) : AndroidViewModel(applicati
     private  var userId: String
 
     val id: MutableLiveData<String> = MutableLiveData()
+    val taskId: MutableLiveData<String> = MutableLiveData()
     val dataTime: MutableLiveData<String> = MutableLiveData()
     val title: MutableLiveData<String> = MutableLiveData()
     val body: MutableLiveData<String> = MutableLiveData()

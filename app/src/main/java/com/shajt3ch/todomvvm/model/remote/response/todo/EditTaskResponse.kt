@@ -18,4 +18,5 @@ data class EditTaskResponse(
     val createdAt: String, // 2020-04-16T20:50:00.000000Z
     @SerializedName("updated_at")
     val updatedAt: String // 2020-04-18T12:08:09.000000Z
+
 )

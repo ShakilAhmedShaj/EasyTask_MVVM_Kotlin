@@ -32,7 +32,7 @@ class TaskDetailFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(TaskDetailViewModel::class.java)
 
-        val args = TaskDetailFragmentArgs.fromBundle(arguments!!)
+        val args = TaskDetailFragmentArgs.fromBundle(requireArguments())
         viewModel.dataTime.value = args.dateTime
         viewModel.title.value = args.title
         viewModel.body.value = args.body
@@ -40,6 +40,7 @@ class TaskDetailFragment : Fragment() {
         viewModel.userIdField.value = args.userId
         viewModel.bgColor.value = args.statusColor
         viewModel.id.value = args.id
+        viewModel.taskId.value = args.taskId
 
         viewModel.checkUserId()
 
@@ -51,7 +52,8 @@ class TaskDetailFragment : Fragment() {
                     viewModel.id.value.toString(),
                     viewModel.title.value.toString(),
                     viewModel.body.value.toString(),
-                    viewModel.status.value.toString()
+                    viewModel.status.value.toString(),
+                    viewModel.taskId.value.toString()
                 )
             )
         }

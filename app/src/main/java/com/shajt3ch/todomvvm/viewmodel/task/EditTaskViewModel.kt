@@ -8,8 +8,12 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.shajt3ch.todomvvm.BuildConfig
 import com.shajt3ch.todomvvm.model.local.AppPreferences
+import com.shajt3ch.todomvvm.model.local.db.AppDatabase
+import com.shajt3ch.todomvvm.model.local.entity.TaskEntity
 import com.shajt3ch.todomvvm.model.remote.Networking
 import com.shajt3ch.todomvvm.model.remote.request.todo.EditTaskRequest
+import com.shajt3ch.todomvvm.model.remote.response.todo.EditTaskResponse
+import com.shajt3ch.todomvvm.model.remote.response.todo.TaskResponse
 import com.shajt3ch.todomvvm.model.repository.EditTaskRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -24,12 +28,14 @@ class EditTaskViewModel(application: Application) : AndroidViewModel(application
 
     private val networkService = Networking.create(BuildConfig.BASE_URL)
     private var editTaskRepository: EditTaskRepository
-    private var  sharedPreferences = application.getSharedPreferences(BuildConfig.PREF_NAME, Context.MODE_PRIVATE)
+    private var sharedPreferences =
+        application.getSharedPreferences(BuildConfig.PREF_NAME, Context.MODE_PRIVATE)
     private var appPreferences: AppPreferences
     private var token: String = ""
 
 
     val id: MutableLiveData<String> = MutableLiveData()
+    val taskId: MutableLiveData<String> = MutableLiveData()
     val title: MutableLiveData<String> = MutableLiveData()
     val body: MutableLiveData<String> = MutableLiveData()
     val status: MutableLiveData<String> = MutableLiveData()
@@ -41,7 +47,8 @@ class EditTaskViewModel(application: Application) : AndroidViewModel(application
     val isError: MutableLiveData<String> = MutableLiveData()
 
     init {
-        editTaskRepository = EditTaskRepository(networkService)
+        editTaskRepository =
+            EditTaskRepository(networkService, AppDatabase.getInstance(application))
         appPreferences = AppPreferences(sharedPreferences)
         token = appPreferences.getAccessToken().toString()
         userId.value = appPreferences.getUserId()
@@ -58,7 +65,7 @@ class EditTaskViewModel(application: Application) : AndroidViewModel(application
                 loading.postValue(true)
                 val data = editTaskRepository.editTask(
                     token, EditTaskRequest(
-                        id.value!!.toInt(),
+                        taskId.value!!.toInt(),
                         userId.value.toString(),
                         title.value.toString(),
                         body.value.toString(),
@@ -66,6 +73,11 @@ class EditTaskViewModel(application: Application) : AndroidViewModel(application
                     )
                 )
                 if (data.code() == 201) {
+
+                    /*
+                    updating to local db
+                     */
+                    updateTask(data.body()!!)
                     isSuccess.postValue(true)
                 } else {
                     isSuccess.postValue(false)
@@ -75,13 +87,50 @@ class EditTaskViewModel(application: Application) : AndroidViewModel(application
 
             } catch (httpException: HttpException) {
                 Log.e(TAG, httpException.toString())
-                isError.value = httpException.toString()
+                isError.postValue(httpException.toString())
 
             } catch (exception: Exception) {
                 Log.e(TAG, exception.toString())
-                isError.value = exception.toString()
+                isError.postValue(exception.toString())
             }
 
+        }
+
+    }
+
+    /*
+    update in local db
+     */
+
+    private fun updateTask(editTaskResponse: EditTaskResponse) {
+        try {
+
+            CoroutineScope(Dispatchers.IO).launch {
+
+                loading.postValue(true)
+
+                val id = editTaskRepository.updateTask(
+                    TaskEntity(
+                        id = id.value!!.toLong(),
+                        taskId = editTaskResponse.id,
+                        title = editTaskResponse.title,
+                        body = editTaskResponse.body,
+                        status = editTaskResponse.status,
+                        userId = editTaskResponse.userId.toInt(),
+                        createdAt = editTaskResponse.createdAt,
+                        updatedAt = editTaskResponse.updatedAt
+                    )
+                )
+
+                if (id > 0) {
+                    Log.e(TAG, " $id : Update Success")
+                }
+                loading.postValue(false)
+            }
+
+
+        } catch (error: Exception) {
+            Log.e(TAG, error.message.toString())
         }
 
     }

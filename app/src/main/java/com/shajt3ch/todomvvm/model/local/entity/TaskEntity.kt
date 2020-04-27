@@ -39,7 +39,7 @@ data class TaskEntity(
     val updatedAt: String, // 2020-04-16 15:25:13
 
     @ColumnInfo(name = "bg_color")
-    var bg_color: Int
+    var bg_color: Int = 0
 
 ) {
 

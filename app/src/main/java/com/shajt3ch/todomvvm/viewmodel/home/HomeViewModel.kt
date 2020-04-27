@@ -31,7 +31,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         application.getSharedPreferences(BuildConfig.PREF_NAME, Context.MODE_PRIVATE)
     private var appPreferences: AppPreferences
     private var token: String
-    val taskList: MutableLiveData<List<TaskResponse>> = MutableLiveData()
+    private val taskList: MutableLiveData<List<TaskResponse>> = MutableLiveData()
     val taskListFromDb: MutableLiveData<List<TaskEntity>> = MutableLiveData() //later
     val progress: MutableLiveData<Boolean> = MutableLiveData()
     val isError: MutableLiveData<String> = MutableLiveData()
@@ -77,9 +77,9 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                             body = task.body,
                             status = task.status,
                             userId = task.userId,
-                            bg_color = task.bg_color,
                             createdAt = task.createdAt,
                             updatedAt = task.updatedAt
+                            //bg_color = task.bg_color
                         )
                     )
                     Log.d(TAG, "New Record : $id")
@@ -164,9 +164,9 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                                     body = task.body,
                                     status = task.status,
                                     userId = task.userId,
-                                    bg_color = task.bg_color,
                                     createdAt = task.createdAt,
                                     updatedAt = task.updatedAt
+                                    //bg_color = task.bg_color
                                 )
                             )
                             Log.d(TAG, "New Record : $id")
