@@ -62,10 +62,10 @@
             android:id="@+id/action_taskDetailFragment_to_editTaskFragment"
             app:destination="@id/editTaskFragment" />
         <argument
-            android:name="id"
+            android:name="taskId"
             app:argType="string" />
         <argument
-            android:name="taskId"
+            android:name="id"
             app:argType="string" />
     </fragment>
     <fragment

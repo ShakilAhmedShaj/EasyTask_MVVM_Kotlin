@@ -32,7 +32,7 @@ class TaskDetailFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(TaskDetailViewModel::class.java)
 
-        val args = TaskDetailFragmentArgs.fromBundle(requireArguments())
+        val args = TaskDetailFragmentArgs.fromBundle(arguments!!)
         viewModel.dataTime.value = args.dateTime
         viewModel.title.value = args.title
         viewModel.body.value = args.body
