@@ -9,7 +9,7 @@
 
         <variable
             name="task"
-            type="com.shajt3ch.todomvvm.model.remote.response.todo.TaskResponse" />
+            type="com.shajt3ch.todomvvm.model.local.entity.TaskEntity" />
 
     </data>
 

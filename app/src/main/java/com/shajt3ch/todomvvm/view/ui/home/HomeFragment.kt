@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.shajt3ch.todomvvm.R
 import com.shajt3ch.todomvvm.databinding.HomeFragmentBinding
+import com.shajt3ch.todomvvm.model.local.entity.TaskEntity
 import com.shajt3ch.todomvvm.model.remote.response.todo.TaskResponse
 import com.shajt3ch.todomvvm.view.adaptor.TaskAdapter
 import com.shajt3ch.todomvvm.view.adaptor.TaskCallBack
@@ -31,7 +32,7 @@ class HomeFragment : Fragment(), TaskCallBack {
     }
 
     private lateinit var viewModel: HomeViewModel
-    private var taskList: ArrayList<TaskResponse> = ArrayList()
+    private var taskList: ArrayList<TaskEntity> = ArrayList() //ArrayList<TaskResponse>
 
     //data bind
     private lateinit var binding: HomeFragmentBinding
@@ -62,9 +63,10 @@ class HomeFragment : Fragment(), TaskCallBack {
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
         observer()
-        getAllTask()
+        //getAllTask()
     }
 
+    /*
     private fun getAllTask() {
         viewModel.getAllTask().observe(viewLifecycleOwner, Observer {
 
@@ -75,12 +77,10 @@ class HomeFragment : Fragment(), TaskCallBack {
 
             setRecyclerView()
 
-            /*for (task in taskList) {
-                Log.e(TAG, "Title : ${task.title} Body : ${task.body}")
-            }*/
-
         })
     }
+
+     */
 
     private fun setRecyclerView() {
 
@@ -97,7 +97,8 @@ class HomeFragment : Fragment(), TaskCallBack {
             Log.e(TAG, "Position: $position is a long click")
         } else {
 
-            val data = viewModel.taskList.value?.get(position)
+            //val data = viewModel.taskList.value?.get(position)
+            val data = viewModel.taskListFromDb.value?.get(position)
 
             findNavController().navigate(
                 HomeFragmentDirections.actionNavigationHomeToTaskDetailFragment(
@@ -107,7 +108,8 @@ class HomeFragment : Fragment(), TaskCallBack {
                     data?.status.toString(),
                     data?.userId.toString(),
                     data?.bg_color.toString(),
-                    data?.id.toString()
+                    data?.id.toString(),
+                    data?.taskId.toString()
 
                 )
             )
@@ -124,6 +126,14 @@ class HomeFragment : Fragment(), TaskCallBack {
 
         viewModel.progress.observe(viewLifecycleOwner, Observer {
             pb_home.visibility = if (it) View.VISIBLE else View.GONE
+        })
+
+        viewModel.taskListFromDb.observe(viewLifecycleOwner, Observer {
+            taskList.clear()
+
+            taskList = it!!.toCollection(taskList)
+
+            setRecyclerView()
         })
     }
 

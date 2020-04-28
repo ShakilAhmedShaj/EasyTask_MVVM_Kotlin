@@ -37,9 +37,11 @@ class EditTaskFragment : Fragment() {
 
         val args = EditTaskFragmentArgs.fromBundle(arguments!!)
         viewModel.id.value = args.taskId
+        viewModel.taskId.value = args.id
         viewModel.title.value = args.taskTitle
         viewModel.body.value = args.taskBody
         viewModel.status.value = args.taskStatus
+
 
 
         fab_editTask.setOnClickListener {

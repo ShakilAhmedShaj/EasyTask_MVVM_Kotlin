@@ -62,6 +62,9 @@
             android:id="@+id/action_taskDetailFragment_to_editTaskFragment"
             app:destination="@id/editTaskFragment" />
         <argument
+            android:name="taskId"
+            app:argType="string" />
+        <argument
             android:name="id"
             app:argType="string" />
     </fragment>
@@ -90,6 +93,9 @@
             app:destination="@id/navigation_home"
             app:popUpTo="@id/taskDetailFragment"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="id"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"

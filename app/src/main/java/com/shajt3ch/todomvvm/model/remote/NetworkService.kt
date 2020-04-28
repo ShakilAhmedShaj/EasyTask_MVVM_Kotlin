@@ -41,6 +41,13 @@ interface NetworkService {
     @GET(EndPoints.ALL_TASK)
     suspend fun getAllTask(@Header("Authorization") token: String): Response<List<TaskResponse>>
 
+    @GET("${EndPoints.GET_TASK_By_ID} {maxId}")
+    suspend fun getTaskById(
+        @Header(
+            "Authorization"
+        ) token: String, @Path("maxId") maxId: String
+
+    ): Response<List<TaskResponse>>
 
     @POST(EndPoints.EDIT_TASK)
     suspend fun editTask(
