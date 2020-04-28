@@ -166,7 +166,6 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                                     userId = task.userId,
                                     createdAt = task.createdAt,
                                     updatedAt = task.updatedAt
-                                    //bg_color = task.bg_color
                                 )
                             )
                             Log.d(TAG, "New Record : $id")
