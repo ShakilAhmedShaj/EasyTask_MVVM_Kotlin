@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.shajt3ch.todomvvm.R
 import com.shajt3ch.todomvvm.viewmodel.task.TaskDetailViewModel
 import kotlinx.android.synthetic.main.task_detail_fragment.*
+import org.jetbrains.anko.support.v4.alert
 
 class TaskDetailFragment : Fragment() {
 
@@ -26,20 +27,19 @@ class TaskDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View = inflater.inflate(R.layout.task_detail_fragment, container, false)
 
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         viewModel = ViewModelProvider(this).get(TaskDetailViewModel::class.java)
 
-        val args = TaskDetailFragmentArgs.fromBundle(arguments!!)
+        val args = TaskDetailFragmentArgs.fromBundle(requireArguments())
         viewModel.dataTime.value = args.dateTime
         viewModel.title.value = args.title
         viewModel.body.value = args.body
         viewModel.status.value = args.status
         viewModel.userIdField.value = args.userId
         viewModel.bgColor.value = args.statusColor
-        viewModel.id.value = args.id
+        viewModel.idField.value = args.id
         viewModel.taskId.value = args.taskId
 
         viewModel.checkUserId()
@@ -49,7 +49,7 @@ class TaskDetailFragment : Fragment() {
         fb_edit.setOnClickListener {
             findNavController().navigate(
                 TaskDetailFragmentDirections.actionTaskDetailFragmentToEditTaskFragment(
-                    viewModel.id.value.toString(),
+                    viewModel.idField.value.toString(),
                     viewModel.title.value.toString(),
                     viewModel.body.value.toString(),
                     viewModel.status.value.toString(),
@@ -57,10 +57,15 @@ class TaskDetailFragment : Fragment() {
                 )
             )
         }
+
+        fb_delete.setOnClickListener {
+            deleteConfirmDialog()
+        }
+
     }
 
     private fun observerData() {
-        viewModel.id.observe(viewLifecycleOwner, Observer {
+        viewModel.idField.observe(viewLifecycleOwner, Observer {
 
         })
 
@@ -88,12 +93,56 @@ class TaskDetailFragment : Fragment() {
 
         })
 
-        viewModel.isEditable.observe(viewLifecycleOwner, Observer {
+        viewModel.isValidUser.observe(viewLifecycleOwner, Observer {
 
             fb_edit.visibility = if (it) View.VISIBLE else View.GONE
+            fb_delete.visibility = if (it) View.VISIBLE else View.GONE
         })
+        viewModel.isDeleted.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                deleteSuccessDialog()
+            } else {
+                deleteErrorDialog()
+            }
+        })
+    }
 
+    private fun deleteConfirmDialog() {
+        alert {
+            isCancelable = false
+            title = getString(R.string.alert_delete_title)
+            message = getString(R.string.alert_delete_msg)
+            positiveButton("YES") {
+                it.dismiss()
+                viewModel.deleteTask()
+            }
+            negativeButton("NO") {
+                it.dismiss()
+            }
+        }.show()
+    }
 
+    private fun deleteSuccessDialog() {
+        alert {
+            isCancelable = false
+            title = getString(R.string.alert_success_title)
+            message = getString(R.string.alert_delete_success)
+            positiveButton("OK") {
+                it.dismiss()
+                findNavController().navigate(TaskDetailFragmentDirections.actionTaskDetailFragmentToNavigationHome())
+            }
+        }.show()
+    }
+
+    private fun deleteErrorDialog() {
+        alert {
+            isCancelable = false
+            title = getString(R.string.alert_error_title)
+            message = getString(R.string.alert_delete_error)
+            positiveButton("OK") {
+                it.dismiss()
+            }
+        }.show()
     }
 
 }

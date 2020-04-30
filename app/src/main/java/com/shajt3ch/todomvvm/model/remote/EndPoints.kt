@@ -15,5 +15,6 @@ object EndPoints {
     const val EDIT_TASK = "api/task/update_task"
     const val GET_USER_PROFILE = "api/users/detail/"
     const val EDIT_PROFILE = "api/users/edit/user"
+    const val DELETE_TASK = "api/task/delete_task"
 
 }

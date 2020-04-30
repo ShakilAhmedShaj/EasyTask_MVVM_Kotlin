@@ -13,7 +13,7 @@ android {
         enabled = true
     }
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    buildToolsVersion "29.0.3"
     defaultConfig {
         applicationId "com.shajt3ch.todomvvm"
         minSdkVersion 21

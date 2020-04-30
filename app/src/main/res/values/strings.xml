@@ -90,4 +90,9 @@
     <string name="error_code_404">The server can not find the requested resource.</string>
     <string name="error_code_500">The server has encountered a situation it doesn\'t know how to handle.</string>
 
+    <string name="alert_delete_title">Warning!</string>
+    <string name="alert_delete_msg">Do you want to delete?</string>
+    <string name="alert_delete_success">Successfully Deleted!</string>
+    <string name="alert_delete_error">Deleting Failed !</string>
+
 </resources>
