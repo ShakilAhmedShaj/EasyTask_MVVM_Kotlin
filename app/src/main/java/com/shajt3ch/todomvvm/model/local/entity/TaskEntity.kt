@@ -17,6 +17,9 @@ data class TaskEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0L,
 
+    @ColumnInfo(name = "userId")
+    val userId: Int, // 1
+
     @ColumnInfo(name = "taskId")
     val taskId: Int,
 
@@ -28,9 +31,6 @@ data class TaskEntity(
 
     @ColumnInfo(name = "status")
     val status: String, // PENDING
-
-    @ColumnInfo(name = "userId")
-    val userId: Int, // 1
 
     @ColumnInfo(name = "createdAt")
     val createdAt: String, // 2020-04-16 15:25:13

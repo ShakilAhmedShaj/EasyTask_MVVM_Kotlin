@@ -71,19 +71,18 @@ class TaskDetailViewModel(application: Application) : AndroidViewModel(applicati
         viewModelScope.launch {
             val response = deleteTaskRepository.deleteTaskFromApi(
                 token,
-                DeleteTaskRequest(taskId.value!!, userId)
+                DeleteTaskRequest(idField.value!!, userId)
             )
 
             if (response.code() == 200) {
                 response.body()?.run {
                     val result = deleteTaskRepository.deleteTaskFromDb(
                         TaskEntity(
-                            id = idField.value!!.toLong(),
-                            taskId = this.id,
+                            taskId = id,
+                            userId = this.userId,
                             title = this.title,
                             body = this.body,
                             status = this.status,
-                            userId = this.userId,
                             createdAt = this.createdAt,
                             updatedAt = this.updatedAt
                         )
