@@ -2,12 +2,18 @@ package com.shajt3ch.todomvvm.viewmodel.task
 
 import android.app.Application
 import android.content.Context
-import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.shajt3ch.todomvvm.BuildConfig
 import com.shajt3ch.todomvvm.model.local.AppPreferences
+import com.shajt3ch.todomvvm.model.local.db.AppDatabase
+import com.shajt3ch.todomvvm.model.local.entity.TaskEntity
+import com.shajt3ch.todomvvm.model.remote.Networking
+import com.shajt3ch.todomvvm.model.remote.request.todo.DeleteTaskRequest
+import com.shajt3ch.todomvvm.model.repository.DeleteTaskRepository
+import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
 class TaskDetailViewModel(application: Application) : AndroidViewModel(application) {
@@ -15,11 +21,15 @@ class TaskDetailViewModel(application: Application) : AndroidViewModel(applicati
         const val TAG = "TaskDetailViewModel"
     }
 
-    private var  sharedPreferences = application.getSharedPreferences(BuildConfig.PREF_NAME, Context.MODE_PRIVATE)
-    private  var appPreferences: AppPreferences
-    private  var userId: String
+    private val networkService = Networking.create(BuildConfig.BASE_URL)
+    private lateinit var deleteTaskRepository: DeleteTaskRepository
 
-    val id: MutableLiveData<String> = MutableLiveData()
+    private var sharedPreferences =
+        application.getSharedPreferences(BuildConfig.PREF_NAME, Context.MODE_PRIVATE)
+    private var appPreferences: AppPreferences
+    private var userId: String
+
+    val idField: MutableLiveData<String> = MutableLiveData()
     val taskId: MutableLiveData<String> = MutableLiveData()
     val dataTime: MutableLiveData<String> = MutableLiveData()
     val title: MutableLiveData<String> = MutableLiveData()
@@ -27,18 +37,24 @@ class TaskDetailViewModel(application: Application) : AndroidViewModel(applicati
     val status: MutableLiveData<String> = MutableLiveData()
     val userIdField: MutableLiveData<String> = MutableLiveData()
     val bgColor: MutableLiveData<String> = MutableLiveData()
-    val isEditable: MutableLiveData<Boolean> = MutableLiveData()
+    val isValidUser: MutableLiveData<Boolean> = MutableLiveData()
+    val isDeleted: MutableLiveData<Boolean> = MutableLiveData()
+    private var token: String = ""
 
     init {
+        deleteTaskRepository =
+            DeleteTaskRepository(networkService, AppDatabase.getInstance(application))
         appPreferences = AppPreferences(sharedPreferences)
         userId = appPreferences.getUserId().toString()
+
+        token = appPreferences.getAccessToken().toString()
     }
 
 
     fun checkUserId() {
 
         try {
-            isEditable.value = userIdField.value == userId
+            isValidUser.value = userIdField.value == userId
 
         } catch (httpException: HttpException) {
             Log.e(TAG, httpException.toString())
@@ -49,6 +65,31 @@ class TaskDetailViewModel(application: Application) : AndroidViewModel(applicati
 
         }
 
+    }
+
+    fun deleteTask() {
+        viewModelScope.launch {
+            val response = deleteTaskRepository.deleteTaskFromApi(
+                token,
+                DeleteTaskRequest(idField.value!!, userId)
+            )
+
+            if (response.code() == 200) {
+                response.body()?.run {
+                    val result = deleteTaskRepository.deleteFromDb(idField.value!!)
+
+                    if (result >= 1) {
+                        isDeleted.postValue(true)
+                        Log.d(TAG, "Deleted row : $result")
+                    } else {
+                        isDeleted.postValue(false)
+                        Log.d(TAG, "Error in Delete row")
+                    }
+
+                }
+
+            }
+        }
     }
 
 }

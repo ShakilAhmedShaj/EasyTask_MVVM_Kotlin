@@ -35,9 +35,9 @@ class EditTaskFragment : Fragment() {
 
         resources.getStringArray(R.array.task_status_list).toCollection(viewModel.taskList)
 
-        val args = EditTaskFragmentArgs.fromBundle(arguments!!)
-        viewModel.id.value = args.taskId
-        viewModel.taskId.value = args.id
+        val args = EditTaskFragmentArgs.fromBundle(requireArguments())
+        viewModel.id.value = args.id
+        viewModel.taskId.value = args.taskId
         viewModel.title.value = args.taskTitle
         viewModel.body.value = args.taskBody
         viewModel.status.value = args.taskStatus

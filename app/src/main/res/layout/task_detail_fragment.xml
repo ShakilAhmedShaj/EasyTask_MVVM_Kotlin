@@ -76,6 +76,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fb_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_delete"
+        app:backgroundTint="@color/delete_fab"
+        app:layout_constraintBottom_toTopOf="@+id/fb_edit"
+        app:layout_constraintEnd_toStartOf="@+id/status_color"
+        app:tint="@color/white" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fb_edit"
         android:layout_width="wrap_content"

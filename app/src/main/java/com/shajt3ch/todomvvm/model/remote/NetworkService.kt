@@ -3,6 +3,7 @@ package com.shajt3ch.todomvvm.model.remote
 import com.shajt3ch.todomvvm.model.remote.request.auth.LoginRequest
 import com.shajt3ch.todomvvm.model.remote.request.auth.RegisterRequest
 import com.shajt3ch.todomvvm.model.remote.request.todo.AddTaskRequest
+import com.shajt3ch.todomvvm.model.remote.request.todo.DeleteTaskRequest
 import com.shajt3ch.todomvvm.model.remote.request.todo.EditTaskRequest
 import com.shajt3ch.todomvvm.model.remote.response.auth.LoginResponse
 import com.shajt3ch.todomvvm.model.remote.response.auth.RegisterResponse
@@ -71,5 +72,11 @@ interface NetworkService {
         @Part profile_image: MultipartBody.Part? = null,
         @Part("bio") bio: RequestBody
     ): Response<EditProfileResponse>
+
+    @POST(EndPoints.DELETE_TASK)
+    suspend fun deleteTask(
+        @Header("Authorization") token: String,
+        @Body deleteTaskRequest: DeleteTaskRequest
+    ): Response<TaskResponse>
 
 }

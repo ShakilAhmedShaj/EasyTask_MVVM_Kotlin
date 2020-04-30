@@ -15,4 +15,5 @@
     <color name="status_started">#2196F3</color>
     <color name="status_completed">#4CAF50</color>
     <color name="green">#C3F0CA</color>
+    <color name="delete_fab">#DD5656</color>
 </resources>
