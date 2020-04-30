@@ -18,4 +18,6 @@ class DeleteTaskRepository(
         networkService.deleteTask(token, deleteTaskRequest)
 
     suspend fun deleteTaskFromDb(taskEntity: TaskEntity) = appDatabase.taskDao().delete(taskEntity)
+
+    suspend fun deleteFromDb(taskId: String) = appDatabase.taskDao().deleteTaskFromDb(taskId)
 }

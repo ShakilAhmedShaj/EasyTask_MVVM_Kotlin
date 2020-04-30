@@ -76,17 +76,7 @@ class TaskDetailViewModel(application: Application) : AndroidViewModel(applicati
 
             if (response.code() == 200) {
                 response.body()?.run {
-                    val result = deleteTaskRepository.deleteTaskFromDb(
-                        TaskEntity(
-                            taskId = id,
-                            userId = this.userId,
-                            title = this.title,
-                            body = this.body,
-                            status = this.status,
-                            createdAt = this.createdAt,
-                            updatedAt = this.updatedAt
-                        )
-                    )
+                    val result = deleteTaskRepository.deleteFromDb(idField.value!!)
 
                     if (result >= 1) {
                         isDeleted.postValue(true)
