@@ -31,6 +31,7 @@ class EditProfileViewModel(application: Application) : AndroidViewModel(applicat
 
     private var token: String
     private var userId: String
+
     val loading: MutableLiveData<Boolean> = MutableLiveData()
     val imageUrl: MutableLiveData<String> = MutableLiveData()
     val nameField: MutableLiveData<String> = MutableLiveData()

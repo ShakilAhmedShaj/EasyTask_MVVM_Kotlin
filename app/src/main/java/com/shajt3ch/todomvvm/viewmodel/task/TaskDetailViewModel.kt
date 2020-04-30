@@ -9,7 +9,6 @@ import androidx.lifecycle.viewModelScope
 import com.shajt3ch.todomvvm.BuildConfig
 import com.shajt3ch.todomvvm.model.local.AppPreferences
 import com.shajt3ch.todomvvm.model.local.db.AppDatabase
-import com.shajt3ch.todomvvm.model.local.entity.TaskEntity
 import com.shajt3ch.todomvvm.model.remote.Networking
 import com.shajt3ch.todomvvm.model.remote.request.todo.DeleteTaskRequest
 import com.shajt3ch.todomvvm.model.repository.DeleteTaskRepository
@@ -29,7 +28,7 @@ class TaskDetailViewModel(application: Application) : AndroidViewModel(applicati
     private var appPreferences: AppPreferences
     private var userId: String
 
-    val idField: MutableLiveData<String> = MutableLiveData()
+    val apiTaskId: MutableLiveData<String> = MutableLiveData()
     val taskId: MutableLiveData<String> = MutableLiveData()
     val dataTime: MutableLiveData<String> = MutableLiveData()
     val title: MutableLiveData<String> = MutableLiveData()
@@ -71,12 +70,13 @@ class TaskDetailViewModel(application: Application) : AndroidViewModel(applicati
         viewModelScope.launch {
             val response = deleteTaskRepository.deleteTaskFromApi(
                 token,
-                DeleteTaskRequest(idField.value!!, userId)
+                DeleteTaskRequest(apiTaskId.value!!, userId)
             )
 
             if (response.code() == 200) {
                 response.body()?.run {
-                    val result = deleteTaskRepository.deleteFromDb(idField.value!!)
+
+                    val result = deleteTaskRepository.deleteFromDb(apiTaskId.value!!)
 
                     if (result >= 1) {
                         isDeleted.postValue(true)

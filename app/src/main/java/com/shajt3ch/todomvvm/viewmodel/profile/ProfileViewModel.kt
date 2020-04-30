@@ -25,9 +25,10 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
     private  var appPreferences: AppPreferences
     private  var token: String
     private  var userId: String
-    val loading: MutableLiveData<Boolean> = MutableLiveData()
     lateinit var profile: UserProfileResponse
+
     val imageUrl: MutableLiveData<String> = MutableLiveData()
+    val loading: MutableLiveData<Boolean> = MutableLiveData()
 
     init {
         userProfileRepository = UserProfileRepository(networkService)

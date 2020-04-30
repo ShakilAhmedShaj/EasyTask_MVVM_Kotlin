@@ -24,11 +24,13 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
     private var addTaskRepository: AddTaskRepository
     private var  sharedPreferences = application.getSharedPreferences(BuildConfig.PREF_NAME, Context.MODE_PRIVATE)
     private var appPreferences: AppPreferences
-    private var token: String = ""
+
     val userId: MutableLiveData<Int> = MutableLiveData()
+    val isError: MutableLiveData<String> = MutableLiveData()
     val progress: MutableLiveData<Boolean> = MutableLiveData()
     private val isSuccess: MutableLiveData<Boolean> = MutableLiveData()
-    val isError: MutableLiveData<String> = MutableLiveData()
+
+    private var token: String = ""
 
     init {
         addTaskRepository = AddTaskRepository(networkService)

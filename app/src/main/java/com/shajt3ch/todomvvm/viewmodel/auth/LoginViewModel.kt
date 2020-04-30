@@ -33,7 +33,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     private var loginRepository: LoginRepository
     private var  sharedPreferences = application.getSharedPreferences(BuildConfig.PREF_NAME, Context.MODE_PRIVATE)
     private var appPreferences: AppPreferences
-    val loginResponse: MutableLiveData<LoginResponse> = MutableLiveData()
+    private val loginResponse: MutableLiveData<LoginResponse> = MutableLiveData()
     val isSuccess: MutableLiveData<Boolean> = MutableLiveData()
     val isError: MutableLiveData<String> = MutableLiveData()
     val errorMsg: MutableLiveData<String> = MutableLiveData()

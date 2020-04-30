@@ -27,16 +27,19 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     private val networkService = Networking.create(BuildConfig.BASE_URL)
     private var taskRepository: TaskRepository
-    private var sharedPreferences =
-        application.getSharedPreferences(BuildConfig.PREF_NAME, Context.MODE_PRIVATE)
+    private var sharedPreferences = application.getSharedPreferences(BuildConfig.PREF_NAME, Context.MODE_PRIVATE)
     private var appPreferences: AppPreferences
-    private var token: String
+
+
     private val taskList: MutableLiveData<List<TaskResponse>> = MutableLiveData()
+    private val maxRecId: MutableLiveData<String> = MutableLiveData()
+
     val taskListFromDb: MutableLiveData<List<TaskEntity>> = MutableLiveData() //later
     val progress: MutableLiveData<Boolean> = MutableLiveData()
     val isError: MutableLiveData<String> = MutableLiveData()
-    private val maxRecId: MutableLiveData<String> = MutableLiveData()
+
     private var context: Context? = null
+    private var token: String
 
     init {
         taskRepository = TaskRepository(networkService, AppDatabase.getInstance(application))

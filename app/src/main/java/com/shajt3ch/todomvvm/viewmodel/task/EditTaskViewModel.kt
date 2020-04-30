@@ -28,8 +28,7 @@ class EditTaskViewModel(application: Application) : AndroidViewModel(application
 
     private val networkService = Networking.create(BuildConfig.BASE_URL)
     private var editTaskRepository: EditTaskRepository
-    private var sharedPreferences =
-        application.getSharedPreferences(BuildConfig.PREF_NAME, Context.MODE_PRIVATE)
+    private var sharedPreferences = application.getSharedPreferences(BuildConfig.PREF_NAME, Context.MODE_PRIVATE)
     private var appPreferences: AppPreferences
     private var token: String = ""
 

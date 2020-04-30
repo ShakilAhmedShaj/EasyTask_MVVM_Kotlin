@@ -39,7 +39,7 @@ class TaskDetailFragment : Fragment() {
         viewModel.status.value = args.status
         viewModel.userIdField.value = args.userId
         viewModel.bgColor.value = args.statusColor
-        viewModel.idField.value = args.id
+        viewModel.apiTaskId.value = args.id
         viewModel.taskId.value = args.taskId
 
         viewModel.checkUserId()
@@ -49,7 +49,7 @@ class TaskDetailFragment : Fragment() {
         fb_edit.setOnClickListener {
             findNavController().navigate(
                 TaskDetailFragmentDirections.actionTaskDetailFragmentToEditTaskFragment(
-                    viewModel.idField.value.toString(),
+                    viewModel.apiTaskId.value.toString(),
                     viewModel.title.value.toString(),
                     viewModel.body.value.toString(),
                     viewModel.status.value.toString(),
@@ -65,7 +65,7 @@ class TaskDetailFragment : Fragment() {
     }
 
     private fun observerData() {
-        viewModel.idField.observe(viewLifecycleOwner, Observer {
+        viewModel.apiTaskId.observe(viewLifecycleOwner, Observer {
 
         })
 
