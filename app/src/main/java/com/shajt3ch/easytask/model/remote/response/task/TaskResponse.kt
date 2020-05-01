@@ -1,4 +1,4 @@
-package com.shajt3ch.easytask.model.remote.response.todo
+package com.shajt3ch.easytask.model.remote.response.task
 
 
 import android.widget.TextView

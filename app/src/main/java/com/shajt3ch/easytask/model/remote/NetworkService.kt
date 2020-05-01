@@ -10,9 +10,9 @@ import com.shajt3ch.easytask.model.remote.response.auth.RegisterResponse
 import com.shajt3ch.easytask.model.remote.response.auth.ValidateResponse
 import com.shajt3ch.easytask.model.remote.response.profile.EditProfileResponse
 import com.shajt3ch.easytask.model.remote.response.profile.UserProfileResponse
-import com.shajt3ch.easytask.model.remote.response.todo.AddTaskResponse
-import com.shajt3ch.easytask.model.remote.response.todo.EditTaskResponse
-import com.shajt3ch.easytask.model.remote.response.todo.TaskResponse
+import com.shajt3ch.easytask.model.remote.response.task.AddTaskResponse
+import com.shajt3ch.easytask.model.remote.response.task.EditTaskResponse
+import com.shajt3ch.easytask.model.remote.response.task.TaskResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response

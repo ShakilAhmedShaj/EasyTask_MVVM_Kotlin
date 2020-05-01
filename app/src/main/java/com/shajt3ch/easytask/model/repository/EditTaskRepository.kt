@@ -4,7 +4,7 @@ import com.shajt3ch.easytask.model.local.db.AppDatabase
 import com.shajt3ch.easytask.model.local.entity.TaskEntity
 import com.shajt3ch.easytask.model.remote.NetworkService
 import com.shajt3ch.easytask.model.remote.request.task.EditTaskRequest
-import com.shajt3ch.easytask.model.remote.response.todo.EditTaskResponse
+import com.shajt3ch.easytask.model.remote.response.task.EditTaskResponse
 import retrofit2.Response
 
 /**

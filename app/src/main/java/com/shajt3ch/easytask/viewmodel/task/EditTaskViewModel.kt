@@ -11,7 +11,7 @@ import com.shajt3ch.easytask.model.local.db.AppDatabase
 import com.shajt3ch.easytask.model.local.entity.TaskEntity
 import com.shajt3ch.easytask.model.remote.Networking
 import com.shajt3ch.easytask.model.remote.request.task.EditTaskRequest
-import com.shajt3ch.easytask.model.remote.response.todo.EditTaskResponse
+import com.shajt3ch.easytask.model.remote.response.task.EditTaskResponse
 import com.shajt3ch.easytask.model.repository.EditTaskRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

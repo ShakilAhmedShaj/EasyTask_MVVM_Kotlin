@@ -89,7 +89,7 @@ The following is a high level overview of relevant files and folders.
                                 │   │       │       EditProfileResponse.kt
                                 │   │       │       UserProfileResponse.kt
                                 │   │       │
-                                │   │       └───todo
+                                │   │       └───task
                                 │   │               AddTaskResponse.kt
                                 │   │               EditTaskResponse.kt
                                 │   │               TaskResponse.kt
