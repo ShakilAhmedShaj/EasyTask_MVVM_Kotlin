@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">To Do MVVM</string>
+    <string name="app_name">Easy Task</string>
 
     <string name="hint_password">Password</string>
     <string name="hint_userId">Email</string>
