@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.shajt3ch.todomvvm">
+    package="com.shajt3ch.easytask">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -14,16 +14,16 @@
         android:theme="@style/AppTheme"
         android:networkSecurityConfig="@xml/network_security_config"
         android:requestLegacyExternalStorage="true">
-        <activity android:name="com.shajt3ch.todomvvm.view.ui.splash.SplashActivity">
+        <activity android:name="com.shajt3ch.easytask.view.ui.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.shajt3ch.todomvvm.view.ui.auth.SignUpActivity" />
-        <activity android:name="com.shajt3ch.todomvvm.view.ui.auth.LoginActivity" />
-        <activity android:name="com.shajt3ch.todomvvm.view.ui.main.MainActivity" />
+        <activity android:name="com.shajt3ch.easytask.view.ui.auth.SignUpActivity" />
+        <activity android:name="com.shajt3ch.easytask.view.ui.auth.LoginActivity" />
+        <activity android:name="com.shajt3ch.easytask.view.ui.main.MainActivity" />
     </application>
 
 </manifest>
