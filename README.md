@@ -9,6 +9,10 @@
 
 <img src="https://user-images.githubusercontent.com/15268903/80799992-247c4500-8bca-11ea-83f4-99ac9c30e6ff.gif" height="400" width="200" title = "Add Task">   <img src="https://user-images.githubusercontent.com/15268903/80800007-29d98f80-8bca-11ea-9f48-fb94d7a8d724.gif" height="400" width="200" title = "Update Task">   <img src="https://user-images.githubusercontent.com/15268903/80800012-2c3be980-8bca-11ea-8040-203829cdaa8a.gif" height="400" width="200" title = "Delete Task">
 
+-------------------------------------------```Dark Mode```---------------------------------------
+
+<img src="https://user-images.githubusercontent.com/15268903/81949610-daad4900-9624-11ea-87c0-ccb7e89f3216.gif" height="400" width="200" title = "Add Task">   <img src="https://user-images.githubusercontent.com/15268903/81949627-de40d000-9624-11ea-838a-0c7121ab8537.png" height="400" width="200" title = "Update Task">   <img src="https://user-images.githubusercontent.com/15268903/81949630-df71fd00-9624-11ea-8dd4-c8b4b4952657.png" height="400" width="200" title = "Delete Task">
+
 ## Architecture Used
 
 <img src="https://user-images.githubusercontent.com/15268903/80802176-70ca8380-8bd0-11ea-8a4d-770895f2b9ee.png" alt="https://developer.android.com/jetpack/docs/guide" style="width:200;height:200">

@@ -22,12 +22,12 @@
     <string name="empty_user_name_title">Empty UserName!</string>
     <string name="empty_user_name_msg">UserName cannot be empty</string>
 
-<!--    <string name="empty_email_title">Empty Email!</string>-->
-<!--    <string name="empty_email_msg">Email cannot be empty</string>-->
-<!--    <string name="empty_password_title">Empty Password!</string>-->
-<!--    <string name="empty_password_msg">Password cannot be empty</string>-->
-<!--    <string name="empty_confirm_password_title">Empty Confirm Password!</string>-->
-<!--    <string name="empty_confirm_password_msg">Confirm password cannot be empty</string>-->
+    <!--    <string name="empty_email_title">Empty Email!</string>-->
+    <!--    <string name="empty_email_msg">Email cannot be empty</string>-->
+    <!--    <string name="empty_password_title">Empty Password!</string>-->
+    <!--    <string name="empty_password_msg">Password cannot be empty</string>-->
+    <!--    <string name="empty_confirm_password_title">Empty Confirm Password!</string>-->
+    <!--    <string name="empty_confirm_password_msg">Confirm password cannot be empty</string>-->
 
     <string name="error_confirm_password_title">Password Not Matched!</string>
     <string name="error_confirm_password_msg">Confirm password does not match.</string>
@@ -84,7 +84,6 @@
     </string-array>
 
 
-
     <string name="error_code_400">The server could not understand the request due to invalid syntax.</string>
     <string name="error_code_401">Unauthorized! Please login.</string>
     <string name="error_code_404">The server can not find the requested resource.</string>
@@ -94,5 +93,17 @@
     <string name="alert_delete_msg">Do you want to delete?</string>
     <string name="alert_delete_success">Successfully Deleted!</string>
     <string name="alert_delete_error">Deleting Failed !</string>
+
+    <!-- App mode dialog -->
+
+    <string name="select_mode">Select App Theme Mode</string>
+    <string name="light_mode">Light</string>
+    <string name="dark_mode">Dark</string>
+    <string name="system_mode">System</string>
+    <string name="battery_mode">Battery</string>
+    <string name="app_mode">App Theme</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
