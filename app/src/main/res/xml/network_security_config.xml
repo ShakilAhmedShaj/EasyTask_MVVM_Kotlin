@@ -2,7 +2,7 @@
 <network-security-config>
     <domain-config cleartextTrafficPermitted = "true">
         <domain includeSubdomains = "true">
-            mrmed.com.bd
+            apis.shajt3ch.com
         </domain>
         <domain includeSubdomains = "true">
             localhost
