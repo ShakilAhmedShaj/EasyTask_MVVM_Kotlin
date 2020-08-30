@@ -38,7 +38,7 @@
 
 ### Install the apk
 
-<a href="http://shajt3ch.com/EasyTask.apk"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" width="185" height="70"/></a>
+<a href="https://play.google.com/store/apps/details?id=com.decimalab.easytask"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" width="185" height="70"/></a>
 
 Go to the following [link](http://shajt3ch.com/EasyTask.apk) to download the app.
 

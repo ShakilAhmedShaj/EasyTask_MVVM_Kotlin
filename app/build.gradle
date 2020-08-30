@@ -15,7 +15,7 @@ android {
     compileSdkVersion 30
     buildToolsVersion "29.0.3"
     defaultConfig {
-        applicationId "com.shajt3ch.todomvvm"
+        applicationId "com.decimalab.easytask"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1

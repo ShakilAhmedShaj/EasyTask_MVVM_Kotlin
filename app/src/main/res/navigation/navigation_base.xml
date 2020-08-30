@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.shajt3ch.easytask.view.ui.home.HomeFragment"
+        android:name="com.decimalab.easytask.view.ui.home.HomeFragment"
         android:label="@string/navigation_home"
         tools:layout="@layout/home_fragment">
         <action
@@ -22,12 +22,12 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_add_task"
-        android:name="com.shajt3ch.easytask.view.ui.task.TaskFragment"
+        android:name="com.decimalab.easytask.view.ui.task.TaskFragment"
         android:label="@string/navigation_add_task"
         tools:layout="@layout/task_fragment" />
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.shajt3ch.easytask.view.ui.profile.ProfileFragment"
+        android:name="com.decimalab.easytask.view.ui.profile.ProfileFragment"
         android:label="@string/navigation_profile"
         tools:layout="@layout/profile_fragment" >
         <action
@@ -36,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/taskDetailFragment"
-        android:name="com.shajt3ch.easytask.view.ui.task.detail.TaskDetailFragment"
+        android:name="com.decimalab.easytask.view.ui.task.detail.TaskDetailFragment"
         android:label="Task Detail"
         tools:layout="@layout/task_detail_fragment">
         <argument
@@ -73,7 +73,7 @@
     </fragment>
     <fragment
         android:id="@+id/editTaskFragment"
-        android:name="com.shajt3ch.easytask.view.ui.task.edit.EditTaskFragment"
+        android:name="com.decimalab.easytask.view.ui.task.edit.EditTaskFragment"
         android:label="Edit Task"
         tools:layout="@layout/edit_task_fragment">
         <argument
@@ -102,7 +102,7 @@
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
-        android:name="com.shajt3ch.easytask.view.ui.profile.edit.EditProfileFragment"
+        android:name="com.decimalab.easytask.view.ui.profile.edit.EditProfileFragment"
         android:label="Edit Profile"
         tools:layout="@layout/edit_profile_fragment" >
         <argument

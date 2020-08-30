@@ -9,7 +9,7 @@
 
         <variable
             name="task"
-            type="com.shajt3ch.easytask.model.local.entity.TaskEntity" />
+            type="com.decimalab.easytask.model.local.entity.TaskEntity" />
 
     </data>
 
