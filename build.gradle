@@ -2,7 +2,7 @@
 
 buildscript {
     ext {
-        kotlin_version = '1.3.71'
+        kotlin_version = '1.4.0'
         nav_version = "2.3.0-alpha04"
     }
     repositories {
@@ -11,7 +11,7 @@ buildscript {
 
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.3'
+        classpath 'com.android.tools.build:gradle:4.0.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
 
@@ -34,13 +34,13 @@ task clean(type: Delete) {
 }
 
 ext {
-    support_library_version = '1.1.0'
+    support_library_version = '1.2.0'
     anko_version = '0.10.8'
     gif_drawable ='1.2.19'
-    kotlinx_coroutines = '1.3.3'
-    retrofit_version = '2.7.1'
+    kotlinx_coroutines = '1.3.5'
+    retrofit_version = '2.8.1'
     lifecycle_version = '2.2.0'
-    nav_version = "2.3.0-alpha05"
+    nav_version = "2.3.0"
     glide_version = "4.11.0"
     imagepicker = "1.6"
     inline_activity_result_kotlin = "1.0.1"
