@@ -18,8 +18,8 @@ android {
         applicationId "com.decimalab.easytask"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         kapt {
@@ -32,13 +32,13 @@ android {
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "BASE_URL", "\"https://apis.shajt3ch.com/task/\"")
+            buildConfigField("String", "BASE_URL", "\"https://apis.decimalab.com/task/\"")
             buildConfigField("String", "PREF_NAME", "\"com.shajt3ch.todomvvm.pref\"")
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "BASE_URL", "\"https://apis.shajt3ch.com/task/\"")
+            buildConfigField("String", "BASE_URL", "\"https://apis.decimalab.com/task/\"")
             buildConfigField("String", "PREF_NAME", "\"com.shajt3ch.todomvvm.pref\"")
         }
     }
